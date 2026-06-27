@@ -11,7 +11,6 @@ import SwiftUI
 struct SanamApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
         }
     }
 }
