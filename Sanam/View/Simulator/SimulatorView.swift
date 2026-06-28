@@ -14,14 +14,8 @@ struct SimulatorView: View {
         NavigationStack {
             ZStack{
                 
-                //MARK: - background
-                Color.backApp
-                    .ignoresSafeArea()
-                    .overlay(
-                        Image("backFrame")
-                            .resizable()
-                            .opacity(0.7)
-                            .ignoresSafeArea())
+                Background()
+                
                 VStack(spacing: 32){
                     
                     headr(vm: vm)

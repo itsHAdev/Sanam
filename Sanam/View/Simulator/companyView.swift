@@ -19,14 +19,7 @@ struct companyView: View {
             
             //MARK: - Main view
             
-            Color.backApp
-                .ignoresSafeArea()
-                .overlay(
-                    Image("backFrame")
-                        .resizable()
-                        .opacity(0.7)
-                        .ignoresSafeArea()
-                )
+            Background()
 
             VStack(spacing: 12) {
                 headr1(company: vm.company)
