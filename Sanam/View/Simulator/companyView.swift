@@ -48,8 +48,35 @@ struct headr1: View {
 
     var body: some View {
         HStack {
+            //1
+            Button {
+                dismiss()
+            } label: {
+                ZStack {
+                    Circle()
+                        .frame(width: 44, height: 44)
+                        .foregroundStyle(.clear)
+
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 22, weight: .medium))
+                        .foregroundStyle(.textApp)
+                }//z
+            }
+            .glassEffect()
+            
+            Spacer()
+            
+            //2
+            Text(company.fakeName)
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(.textApp)
+
+            Spacer()
+            
+            //3
             NavigationLink {
-                
+                SanamMarket()
+                    .navigationBarBackButtonHidden()
             } label: {
                 ZStack {
                     Rectangle()
@@ -68,29 +95,6 @@ struct headr1: View {
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundStyle(.textApp)
                     }//h
-                }//z
-            }
-            .glassEffect()
-
-            Spacer()
-
-            Text(company.fakeName)
-                .font(.system(size: 17, weight: .semibold))
-                .foregroundStyle(.textApp)
-
-            Spacer()
-
-            Button {
-                dismiss()
-            } label: {
-                ZStack {
-                    Circle()
-                        .frame(width: 44, height: 44)
-                        .foregroundStyle(.clear)
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 22, weight: .medium))
-                        .foregroundStyle(.textApp)
                 }//z
             }
             .glassEffect()

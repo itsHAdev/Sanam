@@ -78,8 +78,6 @@ struct CircleButton: View {
 
     var body: some View {
 
-        
-        
         Button{}label: {
             
             ZStack(alignment: .center){
@@ -95,7 +93,7 @@ struct CircleButton: View {
                                     )
                 
                 Image(systemName: icon)
-                    .font(.system(size: 20,weight: .medium))
+                    .font(.system(size: 22,weight: .medium))
                     .foregroundStyle(.white)
             }//z
         }
@@ -115,19 +113,21 @@ struct SmallButton: View {
             
             ZStack{
                 
-                Circle()
+                Rectangle()
                     .frame(width: 107,height: 27)
                     .foregroundStyle(.darkBlue)
+                    .cornerRadius(100)
                     .shadow(color: .black.opacity(0.1), radius: 1)
                     .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 1)
                     .overlay(
                         RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.white.opacity(0.15), lineWidth: 1)
-                                    )
+                            .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                    )
                 
                 Text(title)
-                    .font(.system(size: 20))
-                    .foregroundStyle(.white)
+                    .font(.system(size: 14,weight: .semibold))
+                    .foregroundStyle(.textApp)
+            
             }//z
         }//b
     
