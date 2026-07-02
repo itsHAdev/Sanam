@@ -9,10 +9,12 @@ import SwiftUI
 
 struct companyView: View {
     @StateObject private var vm: CompanyDetailViewModel
+    @State private var showTradeSheet = false
 
     init(company: Company) {
         _vm = StateObject(wrappedValue: CompanyDetailViewModel(company: company))
     }
+    
 
     var body: some View {
         ZStack {
@@ -32,8 +34,16 @@ struct companyView: View {
                     xLabels: vm.xLabels
                 )
                 summary()
-               Spacer()
-                TadawlButton()
+                Spacer()
+                PrimaryButton(title: "تداول"){
+                    showTradeSheet = true
+                }
+                .sheet(isPresented: $showTradeSheet) {
+                    TradeSheet()
+                        .presentationDetents([.height(650)])
+                        .presentationBackground(.black)
+                        .presentationDragIndicator(.visible)
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -407,24 +417,6 @@ private func summaryRow(title: String, value: String) -> some View {
             .font(.system(size: 10, weight: .regular))
             .frame(width: 70, alignment: .trailing)
             .foregroundColor(.gray)
-    }
-}
-
-struct TadawlButton: View {
-    var body: some View {
-        Button {} label: {
-            ZStack {
-                Rectangle()
-                    .frame(width: 300, height: 44)
-                    .foregroundStyle(.primaryApp)
-                    .cornerRadius(9000)
-
-                Text("تداول")
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundStyle(.textApp)
-            }//z
-        }
-        .glassEffect()
     }
 }
 
