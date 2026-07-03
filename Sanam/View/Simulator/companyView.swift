@@ -10,18 +10,60 @@ import SwiftUI
 struct companyView: View {
     @StateObject private var vm: CompanyDetailViewModel
     @State private var showTradeSheet = false
+    @State private var showTradeToast = false
+    @State private var tradeToastMessage = ""
+    @State private var isTradeSuccess = true
 
     init(company: Company) {
         _vm = StateObject(wrappedValue: CompanyDetailViewModel(company: company))
     }
-    
+
 
     var body: some View {
         ZStack {
-            
+
             //MARK: - Main view
-            
+
             Background()
+
+            if showTradeToast {
+                VStack {
+                    HStack(spacing: 14) {
+                        Button {
+                            showTradeToast = false
+                        } label: {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.textApp)
+                                .font(.system(size: 15, weight: .semibold))
+                        }
+
+                        Spacer()
+
+                        Text(tradeToastMessage)
+                            .foregroundColor(.textApp)
+                            .font(.system(size: 13))
+
+                        ZStack {
+                            Circle()
+                                .fill(isTradeSuccess ? Color.greenApp.opacity(0.19) : Color.redApp.opacity(0.19))
+                                .frame(width: 26, height: 26)
+
+                            Image(systemName: isTradeSuccess ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                .foregroundColor(isTradeSuccess ? .greenApp : .redApp)
+                                .font(.system(size: 18))
+                        }
+                    }
+                    .padding(.horizontal, 18)
+                    .frame(height: 59)
+                    .background(Color.backApp.opacity(0.95))
+                    .cornerRadius(12)
+                    .padding(.horizontal, 17)
+                    .padding(.top, 50)
+
+                    Spacer()
+                }
+                .zIndex(999)
+            }
 
             VStack(spacing: 12) {
                 headr1(company: vm.company)
@@ -39,10 +81,17 @@ struct companyView: View {
                     showTradeSheet = true
                 }
                 .sheet(isPresented: $showTradeSheet) {
-                    TradeSheet(company: vm.company)
-                        .presentationDetents([.height(650)])
-                        .presentationBackground(.black)
-                        .presentationDragIndicator(.visible)
+                    TradeSheet(company: vm.company) { message, success in
+                        tradeToastMessage = message
+                        isTradeSuccess = success
+                        showTradeToast = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            showTradeToast = false
+                        }
+                    }
+                    .presentationDetents([.height(650)])
+                    .presentationBackground(.black)
+                    .presentationDragIndicator(.visible)
                 }
             }
         }
@@ -550,4 +599,6 @@ private func summaryRow(title: String, value: String) -> some View {
             )
         )
     )
+    .environmentObject(SimulatorViewModel())
+    .environmentObject(WalletViewModel())
 }

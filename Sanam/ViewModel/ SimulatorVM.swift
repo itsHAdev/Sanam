@@ -13,6 +13,7 @@ class SimulatorViewModel: ObservableObject {
     @Published var companies: [Company] = []
     @Published var filteredCompanies: [Company] = []
     @Published var selectedSector = "الكل"
+    @Published var ownedShares: [Int: Int] = [:]
 
     let sectors = [
         "الكل",
@@ -57,6 +58,27 @@ class SimulatorViewModel: ObservableObject {
                 $0.sector == selectedSector
             }
         }
+    }
+
+    var ownedCompanies: [Company] {
+        companies.filter { (ownedShares[$0.id, default: 0]) > 0 }
+    }
+
+    @discardableResult
+    func buyStock(company: Company, quantity: Int, wallet: WalletViewModel) -> Bool {
+        let cost = company.stock.currentPrice * Double(quantity)
+        guard wallet.balance >= cost else { return false }
+        wallet.balance -= cost
+        ownedShares[company.id, default: 0] += quantity
+        return true
+    }
+
+    @discardableResult
+    func sellStock(company: Company, quantity: Int, wallet: WalletViewModel) -> Bool {
+        guard ownedShares[company.id, default: 0] >= quantity else { return false }
+        ownedShares[company.id, default: 0] -= quantity
+        wallet.balance += company.stock.currentPrice * Double(quantity)
+        return true
     }
 }
 

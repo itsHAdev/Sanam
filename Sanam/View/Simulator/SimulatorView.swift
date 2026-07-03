@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SimulatorView: View {
-    @StateObject var vm = SimulatorViewModel()
+    @EnvironmentObject var vm: SimulatorViewModel
 
     var body: some View {
         NavigationStack {
@@ -41,6 +41,8 @@ struct SimulatorView: View {
 
 #Preview {
     SimulatorView()
+        .environmentObject(SimulatorViewModel())
+        .environmentObject(WalletViewModel())
 }
 
 //MARK: - CompanyRow

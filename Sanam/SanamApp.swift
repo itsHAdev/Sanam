@@ -9,8 +9,14 @@ import SwiftUI
 
 @main
 struct SanamApp: App {
+    @StateObject private var simulatorVM = SimulatorViewModel()
+    @StateObject private var walletVM = WalletViewModel()
+
     var body: some Scene {
         WindowGroup {
+            RootTabView()
+                .environmentObject(simulatorVM)
+                .environmentObject(walletVM)
         }
     }
 }

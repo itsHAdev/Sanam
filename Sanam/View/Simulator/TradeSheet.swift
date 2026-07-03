@@ -9,9 +9,17 @@ import SwiftUI
 
 struct TradeSheet: View {
     let company: Company
+    var onResult: (String, Bool) -> Void = { _, _ in }
+
+    @EnvironmentObject var simulatorVM: SimulatorViewModel
+    @EnvironmentObject var walletVM: WalletViewModel
+    @Environment(\.dismiss) private var dismiss
     @State private var isBuy = true
     @State private var quantity = 1
-    @State private var ownedShares = 0
+
+    private var ownedShares: Int {
+        simulatorVM.ownedShares[company.id, default: 0]
+    }
 
     var body: some View {
         ZStack{
@@ -142,10 +150,19 @@ struct TradeSheet: View {
                 
                 PrimaryButton(title: isBuy ? "اشتر" : "بع"){
                     if isBuy {
-                        ownedShares += quantity
-                    } else if ownedShares >= quantity {
-                        ownedShares -= quantity
+                        if simulatorVM.buyStock(company: company, quantity: quantity, wallet: walletVM) {
+                            onResult("تم شراء السهم بنجاح", true)
+                        } else {
+                            onResult("رصيدك غير كافٍ", false)
+                        }
+                    } else {
+                        if simulatorVM.sellStock(company: company, quantity: quantity, wallet: walletVM) {
+                            onResult("تم بيع السهم بنجاح", true)
+                        } else {
+                            onResult("ما عندك أسهم كافية للبيع", false)
+                        }
                     }
+                    dismiss()
                 }
                 
             }//vMain
@@ -186,4 +203,6 @@ struct TradeSheet: View {
             )
         )
     )
+    .environmentObject(SimulatorViewModel())
+    .environmentObject(WalletViewModel())
 }
