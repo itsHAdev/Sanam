@@ -31,7 +31,7 @@ struct companyView: View {
                     selectedPeriod: vm.selectedPeriod,
                     xLabels: vm.xLabels
                 )
-                summary()
+                summary(company: vm.company)
                Spacer()
                 TadawlButton()
             }
@@ -342,6 +342,8 @@ private struct StockChartContainer: View {
 //MARK: - Summary
 
 struct summary: View {
+    let company: Company
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
@@ -365,8 +367,8 @@ struct summary: View {
 
             HStack(alignment: .top, spacing: 16) {
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "الكمية المتداولة", value: "...")
-                    summaryRow(title: "القيمة المتداولة", value: "...")
+                    summaryRow(title: "الكمية المتداولة", value: "\(company.stock.statistics.volumeTraded)")
+                    summaryRow(title: "القيمة المتداولة", value: "\(Int(company.stock.statistics.tradingValue))")
                 }
 
                 Divider()
@@ -374,9 +376,9 @@ struct summary: View {
                     .background(Color.white.opacity(0.2))
 
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "إغلاق سابق", value: "...")
-                    summaryRow(title: "عدد الصفقات", value: "...")
-                    summaryRow(title: "متوسط الصفقة", value: "...")
+                    summaryRow(title: "إغلاق سابق", value: String(format: "%.2f", company.stock.statistics.previousClose))
+                    summaryRow(title: "عدد الصفقات", value: "\(company.stock.statistics.numberOfTrades)")
+                    summaryRow(title: "متوسط الصفقة", value: "\(company.stock.statistics.averageTradeSize)")
                 }
 
                 Divider()
@@ -384,9 +386,9 @@ struct summary: View {
                     .background(Color.white.opacity(0.2))
 
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "افتتاح", value: "...")
-                    summaryRow(title: "الأعلى", value: "...")
-                    summaryRow(title: "الأدنى", value: "...")
+                    summaryRow(title: "افتتاح", value: String(format: "%.2f", company.stock.statistics.openPrice))
+                    summaryRow(title: "الأعلى", value: String(format: "%.2f", company.stock.statistics.dayHigh))
+                    summaryRow(title: "الأدنى", value: String(format: "%.2f", company.stock.statistics.dayLow))
                 }
             }
         }
@@ -435,7 +437,21 @@ struct TadawlButton: View {
             fakeName: "بيرن اكس",
             imageName: "🔮",
             sector: "قطاع التقنية",
-            stock: Stock(currentPrice: 124.00, trend: "up", changePercent: 2.10)
+            stock: Stock(
+                currentPrice: 124.00,
+                trend: "up",
+                changePercent: 2.10,
+                statistics: Statistics(
+                    previousClose: 121.45,
+                    openPrice: 121.0,
+                    dayHigh: 126.0,
+                    dayLow: 119.0,
+                    volumeTraded: 2300000,
+                    tradingValue: 285200000,
+                    numberOfTrades: 23302,
+                    averageTradeSize: 12240
+                )
+            )
         )
     )
 }
