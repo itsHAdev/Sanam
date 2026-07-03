@@ -90,6 +90,14 @@ class CompanyDetailViewModel: ObservableObject {
         return (company.stock.currentPrice - baseline) / baseline * 100
     }
 
+    var periodHigh: Double {
+        prices.max() ?? company.stock.statistics.dayHigh
+    }
+
+    var periodLow: Double {
+        prices.min() ?? company.stock.statistics.dayLow
+    }
+
     var xLabels: [String] {
         switch selectedPeriod {
         case "يوم":

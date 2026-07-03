@@ -26,12 +26,12 @@
           "day_high": 124.0,
           "day_low": 118.0,
           "volume_traded": 2300000,
-          "trading_value": 285200000,
+          "trading_value": 278277000,
           "number_of_trades": 23302,
-          "average_trade_size": 12240,
-          "average_price": 122.8,
-          "best_bid": 123.9,
-          "best_ask": 124.1
+          "average_trade_size": 11942,
+          "average_price": 120.99,
+          "best_bid": 123.86,
+          "best_ask": 124.14
         }
       },
       "news": {
@@ -627,12 +627,12 @@
           "day_high": 89.01,
           "day_low": 87.9,
           "volume_traded": 1850000,
-          "trading_value": 163790000,
+          "trading_value": 163540000,
           "number_of_trades": 18540,
-          "average_trade_size": 9940,
-          "average_price": 88.54,
-          "best_bid": 88.5,
-          "best_ask": 88.7
+          "average_trade_size": 8821,
+          "average_price": 88.4,
+          "best_bid": 88.53,
+          "best_ask": 88.67
         }
       },
       "news": {
@@ -1228,12 +1228,12 @@
           "day_high": 68.5,
           "day_low": 67.0,
           "volume_traded": 3100000,
-          "trading_value": 209110000,
+          "trading_value": 209932000,
           "number_of_trades": 27650,
-          "average_trade_size": 7560,
-          "average_price": 67.45,
-          "best_bid": 67.2,
-          "best_ask": 67.4
+          "average_trade_size": 7592,
+          "average_price": 67.72,
+          "best_bid": 67.23,
+          "best_ask": 67.37
         }
       },
       "news": {
@@ -1829,12 +1829,12 @@
           "day_high": 55.1,
           "day_low": 53.98,
           "volume_traded": 1420000,
-          "trading_value": 77548500,
+          "trading_value": 77375800,
           "number_of_trades": 14230,
-          "average_trade_size": 5450,
-          "average_price": 54.61,
-          "best_bid": 54.7,
-          "best_ask": 54.8
+          "average_trade_size": 5438,
+          "average_price": 54.49,
+          "best_bid": 54.71,
+          "best_ask": 54.79
         }
       },
       "news": {
@@ -2430,12 +2430,12 @@
           "day_high": 40.53,
           "day_low": 38.9,
           "volume_traded": 4800000,
-          "trading_value": 187836000,
+          "trading_value": 190272000,
           "number_of_trades": 41200,
-          "average_trade_size": 4560,
-          "average_price": 39.13,
-          "best_bid": 39.0,
-          "best_ask": 39.2
+          "average_trade_size": 4618,
+          "average_price": 39.64,
+          "best_bid": 39.04,
+          "best_ask": 39.16
         }
       },
       "news": {
@@ -3031,12 +3031,12 @@
           "day_high": 73.64,
           "day_low": 72.97,
           "volume_traded": 980000,
-          "trading_value": 71694000,
+          "trading_value": 71873200,
           "number_of_trades": 9870,
-          "average_trade_size": 7270,
-          "average_price": 73.16,
-          "best_bid": 73.1,
-          "best_ask": 73.3
+          "average_trade_size": 7282,
+          "average_price": 73.34,
+          "best_bid": 73.15,
+          "best_ask": 73.25
         }
       },
       "news": {
@@ -3632,10 +3632,10 @@
           "day_high": 92.2,
           "day_low": 90.2,
           "volume_traded": 1650000,
-          "trading_value": 151416000,
+          "trading_value": 150579000,
           "number_of_trades": 16780,
-          "average_trade_size": 9020,
-          "average_price": 91.77,
+          "average_trade_size": 8974,
+          "average_price": 91.26,
           "best_bid": 91.7,
           "best_ask": 91.9
         }
@@ -4233,12 +4233,12 @@
           "day_high": 46.5,
           "day_low": 44.9,
           "volume_traded": 3600000,
-          "trading_value": 163008000,
+          "trading_value": 164232000,
           "number_of_trades": 32400,
-          "average_trade_size": 5040,
-          "average_price": 45.28,
-          "best_bid": 45.1,
-          "best_ask": 45.3
+          "average_trade_size": 5069,
+          "average_price": 45.62,
+          "best_bid": 45.13,
+          "best_ask": 45.27
         }
       },
       "news": {
@@ -4834,12 +4834,12 @@
           "day_high": 82.8,
           "day_low": 81.0,
           "volume_traded": 1380000,
-          "trading_value": 113883000,
+          "trading_value": 113132400,
           "number_of_trades": 13500,
-          "average_trade_size": 8440,
-          "average_price": 82.52,
-          "best_bid": 82.4,
-          "best_ask": 82.6
+          "average_trade_size": 8380,
+          "average_price": 81.98,
+          "best_bid": 82.44,
+          "best_ask": 82.56
         }
       },
       "news": {
@@ -5435,12 +5435,12 @@
           "day_high": 58.8,
           "day_low": 58.0,
           "volume_traded": 1100000,
-          "trading_value": 63932000,
+          "trading_value": 64229000,
           "number_of_trades": 11200,
-          "average_trade_size": 5710,
-          "average_price": 58.12,
-          "best_bid": 58.0,
-          "best_ask": 58.2
+          "average_trade_size": 5735,
+          "average_price": 58.39,
+          "best_bid": 58.04,
+          "best_ask": 58.16
         }
       },
       "news": {

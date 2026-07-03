@@ -33,7 +33,7 @@ struct companyView: View {
                     selectedPeriod: vm.selectedPeriod,
                     xLabels: vm.xLabels
                 )
-                summary(company: vm.company)
+                summary(company: vm.company, periodHigh: vm.periodHigh, periodLow: vm.periodLow)
                 Spacer()
                 PrimaryButton(title: "تداول"){
                     showTradeSheet = true
@@ -354,6 +354,8 @@ private struct StockChartContainer: View {
 
 struct summary: View {
     let company: Company
+    let periodHigh: Double
+    let periodLow: Double
 
     var body: some View {
         VStack(spacing: 16) {
@@ -378,8 +380,8 @@ struct summary: View {
 
             HStack(alignment: .top, spacing: 16) {
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "الكمية المتداولة", value: "\(company.stock.statistics.volumeTraded)")
-                    summaryRow(title: "القيمة المتداولة", value: "\(Int(company.stock.statistics.tradingValue))")
+                    summaryRow(title: "الكمية المتداولة", value: compactNumber(Double(company.stock.statistics.volumeTraded)))
+                    summaryRow(title: "القيمة المتداولة", value: compactNumber(company.stock.statistics.tradingValue))
                 }
 
                 Divider()
@@ -388,8 +390,8 @@ struct summary: View {
 
                 VStack(alignment: .trailing, spacing: 16) {
                     summaryRow(title: "إغلاق سابق", value: String(format: "%.2f", company.stock.statistics.previousClose))
-                    summaryRow(title: "عدد الصفقات", value: "\(company.stock.statistics.numberOfTrades)")
-                    summaryRow(title: "متوسط الصفقة", value: "\(company.stock.statistics.averageTradeSize)")
+                    summaryRow(title: "عدد الصفقات", value: compactNumber(Double(company.stock.statistics.numberOfTrades)))
+                    summaryRow(title: "متوسط الصفقة", value: compactNumber(Double(company.stock.statistics.averageTradeSize)))
                 }
 
                 Divider()
@@ -398,12 +400,25 @@ struct summary: View {
 
                 VStack(alignment: .trailing, spacing: 16) {
                     summaryRow(title: "افتتاح", value: String(format: "%.2f", company.stock.statistics.openPrice))
-                    summaryRow(title: "الأعلى", value: String(format: "%.2f", company.stock.statistics.dayHigh))
-                    summaryRow(title: "الأدنى", value: String(format: "%.2f", company.stock.statistics.dayLow))
+                    summaryRow(title: "الأعلى", value: String(format: "%.2f", periodHigh))
+                    summaryRow(title: "الأدنى", value: String(format: "%.2f", periodLow))
                 }
             }
         }
         .padding()
+    }
+}
+
+private func compactNumber(_ value: Double) -> String {
+    switch abs(value) {
+    case 1_000_000_000...:
+        return String(format: "%.0fB", value / 1_000_000_000)
+    case 1_000_000...:
+        return String(format: "%.0fM", value / 1_000_000)
+    case 1_000...:
+        return String(format: "%.0fK", value / 1_000)
+    default:
+        return String(format: "%.0f", value)
     }
 }
 
@@ -412,13 +427,14 @@ private func summaryRow(title: String, value: String) -> some View {
         Text(value)
             .font(.system(size: 10, weight: .regular))
             .foregroundColor(.white.opacity(0.9))
-            .frame(width: 30, alignment: .leading)
+            .lineLimit(1)
+            .frame(width: 40, alignment: .leading)
 
         Spacer()
 
         Text(title)
             .font(.system(size: 10, weight: .regular))
-            .frame(width: 70, alignment: .trailing)
+            .frame(width: 60, alignment: .trailing)
             .foregroundColor(.gray)
     }
 }
