@@ -54,17 +54,17 @@ struct companyRow: View{
                 
                 ///1
                 VStack(alignment: .center, spacing: 4){
-                    Text("\(company.stock.currentPrice, specifier: "%.2f")")
+                    Text(arabicNumerals(String(format: "%.2f", company.stock.currentPrice)))
                         .font(.system(size: 14,weight: .bold))
                         .foregroundStyle(.textApp)
                     +
                     Text(" سنام")
                         .font(.system(size: 9,weight: .bold))
                         .foregroundStyle(.textApp)
-                    
-                    Text(company.stock.changePercent >= 0
+
+                    Text(arabicNumerals(company.stock.changePercent >= 0
                          ? "+\(String(format: "%.2f", company.stock.changePercent))%"
-                         : "\(String(format: "%.2f", company.stock.changePercent))%")
+                         : "\(String(format: "%.2f", company.stock.changePercent))%"))
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(company.stock.changePercent >= 0 ? .greenApp : .redApp)
                 }//v1

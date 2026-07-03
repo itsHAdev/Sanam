@@ -8,38 +8,41 @@
 import SwiftUI
 
 struct TradeSheet: View {
+    let company: Company
     @State private var isBuy = true
     @State private var quantity = 1
+    @State private var ownedShares = 0
+
     var body: some View {
         ZStack{
             Background()
             VStack{
-                
-                
+
+
                 Text("صفحة التداول")
                     .font(.system(size: 20,weight: .bold))
                     .foregroundStyle(.textApp)
-              
+
                 Spacer()
-                
-                Text("١٢٣.٠٠")
+
+                Text(arabicNumerals(String(format: "%.2f", company.stock.currentPrice * Double(quantity))))
                     .font(.system(size: 55,weight: .semibold))
                     .foregroundStyle(.textApp)
                 +
                 Text(" سنام")
                     .font(.system(size: 18,weight: .light))
                     .foregroundStyle(.gray)
-                
+
                 Spacer()
                 
                 HStack{
                     VStack(alignment: .leading, spacing: 40) {
                         //1
-                        Text("٢")
+                        Text(arabicNumerals("\(ownedShares)"))
                             .font(.system(size: 16))
                             .foregroundStyle(.textApp)
                         +
-                        
+
                         Text(" من الاسهم")
                             .font(.system(size: 16))
                             .foregroundStyle(.textApp)
@@ -100,7 +103,7 @@ struct TradeSheet: View {
                                     .foregroundColor(.white)
                             }
 
-                            Text("1")
+                            Text(arabicNumerals("\(quantity)"))
                                 .font(.system(size: 22,weight: .medium))
                                 .foregroundColor(.white)
 
@@ -138,7 +141,11 @@ struct TradeSheet: View {
                 Spacer()
                 
                 PrimaryButton(title: isBuy ? "اشتر" : "بع"){
-                    
+                    if isBuy {
+                        ownedShares += quantity
+                    } else if ownedShares >= quantity {
+                        ownedShares -= quantity
+                    }
                 }
                 
             }//vMain
@@ -148,5 +155,35 @@ struct TradeSheet: View {
 }
 
 #Preview {
-    TradeSheet()
+    TradeSheet(
+        company: Company(
+            id: 1,
+            fakeName: "بيرن اكس",
+            imageName: "🔮",
+            sector: "قطاع التقنية",
+            stock: Stock(
+                currentPrice: 124.00,
+                trend: "up",
+                changePercent: 2.10,
+                statistics: Statistics(
+                    previousClose: 121.45,
+                    openPrice: 118.0,
+                    dayHigh: 124.0,
+                    dayLow: 118.0,
+                    volumeTraded: 2300000,
+                    tradingValue: 285200000,
+                    numberOfTrades: 23302,
+                    averageTradeSize: 12240
+                )
+            ),
+            chartData: ChartData(
+                timeframes: Timeframes(
+                    oneDay: [PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)],
+                    oneWeek: [PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)],
+                    oneMonth: [PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)],
+                    oneYear: [PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)]
+                )
+            )
+        )
+    )
 }

@@ -39,7 +39,7 @@ struct companyView: View {
                     showTradeSheet = true
                 }
                 .sheet(isPresented: $showTradeSheet) {
-                    TradeSheet()
+                    TradeSheet(company: vm.company)
                         .presentationDetents([.height(650)])
                         .presentationBackground(.black)
                         .presentationDragIndicator(.visible)
@@ -147,13 +147,13 @@ struct companyDetails: View {
             HStack(alignment: .bottom) {
                 Spacer()
 
-                Text(changePercent >= 0
+                Text(arabicNumerals(changePercent >= 0
                      ? "+\(String(format: "%.2f", changePercent))%"
-                     : "\(String(format: "%.2f", changePercent))%")
+                     : "\(String(format: "%.2f", changePercent))%"))
                     .font(.system(size: 16))
                     .foregroundStyle(changePercent >= 0 ? .greenApp : .redApp)
 
-                Text("\(company.stock.currentPrice, specifier: "%.2f")")
+                Text(arabicNumerals(String(format: "%.2f", company.stock.currentPrice)))
                     .font(.system(size: 34, weight: .bold))
                     .foregroundStyle(.textApp)
             }//h
@@ -329,7 +329,7 @@ private struct StockChartContainer: View {
                     ForEach(0..<4) { i in
                         Spacer()
 
-                        Text(String(format: "%.0f", maxPrice - step * Double(i)))
+                        Text(arabicNumerals(String(format: "%.0f", maxPrice - step * Double(i))))
                             .font(.caption2)
                             .foregroundColor(.gray)
                     }
@@ -387,8 +387,8 @@ struct summary: View {
 
             HStack(alignment: .top, spacing: 16) {
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "الكمية المتداولة", value: compactNumber(Double(company.stock.statistics.volumeTraded)))
-                    summaryRow(title: "القيمة المتداولة", value: compactNumber(company.stock.statistics.tradingValue))
+                    summaryRow(title: "الكمية المتداولة", value: arabicNumerals(compactNumber(Double(company.stock.statistics.volumeTraded))))
+                    summaryRow(title: "القيمة المتداولة", value: arabicNumerals(compactNumber(company.stock.statistics.tradingValue)))
                 }
 
                 Divider()
@@ -396,9 +396,9 @@ struct summary: View {
                     .background(Color.white.opacity(0.2))
 
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "إغلاق سابق", value: String(format: "%.2f", company.stock.statistics.previousClose))
-                    summaryRow(title: "عدد الصفقات", value: compactNumber(Double(company.stock.statistics.numberOfTrades)))
-                    summaryRow(title: "متوسط الصفقة", value: compactNumber(Double(company.stock.statistics.averageTradeSize)))
+                    summaryRow(title: "إغلاق سابق", value: arabicNumerals(String(format: "%.2f", company.stock.statistics.previousClose)))
+                    summaryRow(title: "عدد الصفقات", value: arabicNumerals(compactNumber(Double(company.stock.statistics.numberOfTrades))))
+                    summaryRow(title: "متوسط الصفقة", value: arabicNumerals(compactNumber(Double(company.stock.statistics.averageTradeSize))))
                 }
 
                 Divider()
@@ -406,9 +406,9 @@ struct summary: View {
                     .background(Color.white.opacity(0.2))
 
                 VStack(alignment: .trailing, spacing: 16) {
-                    summaryRow(title: "افتتاح", value: String(format: "%.2f", company.stock.statistics.openPrice))
-                    summaryRow(title: "الأعلى", value: String(format: "%.2f", periodHigh))
-                    summaryRow(title: "الأدنى", value: String(format: "%.2f", periodLow))
+                    summaryRow(title: "افتتاح", value: arabicNumerals(String(format: "%.2f", company.stock.statistics.openPrice)))
+                    summaryRow(title: "الأعلى", value: arabicNumerals(String(format: "%.2f", periodHigh)))
+                    summaryRow(title: "الأدنى", value: arabicNumerals(String(format: "%.2f", periodLow)))
                 }
             }
         }
@@ -462,14 +462,24 @@ private func infoRow(term: String, definition: String) -> some View {
     .frame(maxWidth: .infinity, alignment: .trailing)
 }
 
+func arabicNumerals(_ text: String) -> String {
+    let arabic = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"]
+    return text.map { c in
+        if let digit = c.wholeNumberValue {
+            return arabic[digit]
+        }
+        return String(c)
+    }.joined()
+}
+
 private func compactNumber(_ value: Double) -> String {
     switch abs(value) {
     case 1_000_000_000...:
-        return String(format: "%.0fB", value / 1_000_000_000)
+        return String(format: "%.0fمليار", value / 1_000_000_000)
     case 1_000_000...:
-        return String(format: "%.0fM", value / 1_000_000)
+        return String(format: "%.0fم", value / 1_000_000)
     case 1_000...:
-        return String(format: "%.0fK", value / 1_000)
+        return String(format: "%.0fك", value / 1_000)
     default:
         return String(format: "%.0f", value)
     }
