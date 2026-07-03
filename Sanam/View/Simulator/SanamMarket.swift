@@ -16,7 +16,7 @@ struct SanamMarket: View {
             
             VStack(spacing: 32){
             
-                Header(title: "سوق سنام")
+                Header2(title: "سوق سنام")
     
                 //MARK: - shareRectangle
                 
