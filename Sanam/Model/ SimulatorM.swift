@@ -17,6 +17,7 @@ struct Company: Codable, Identifiable {
     let imageName: String
     let sector: String
     let stock: Stock
+    let chartData: ChartData
 
     enum CodingKeys: String, CodingKey {
         case id = "company_id"
@@ -24,6 +25,7 @@ struct Company: Codable, Identifiable {
         case imageName = "image_name"
         case sector
         case stock
+        case chartData = "chart_data"
     }
 }
 
@@ -61,5 +63,28 @@ struct Statistics: Codable {
         case numberOfTrades = "number_of_trades"
         case averageTradeSize = "average_trade_size"
     }
+}
+
+struct ChartData: Codable {
+    let timeframes: Timeframes
+}
+
+struct Timeframes: Codable {
+    let oneDay: [PricePoint]
+    let oneWeek: [PricePoint]
+    let oneMonth: [PricePoint]
+    let oneYear: [PricePoint]
+
+    enum CodingKeys: String, CodingKey {
+        case oneDay = "1D"
+        case oneWeek = "1W"
+        case oneMonth = "1M"
+        case oneYear = "1Y"
+    }
+}
+
+struct PricePoint: Codable {
+    let timestamp: String
+    let price: Double
 }
 

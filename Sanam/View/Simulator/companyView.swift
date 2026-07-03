@@ -26,7 +26,7 @@ struct companyView: View {
             VStack(spacing: 12) {
                 headr1(company: vm.company)
                 Spacer()
-                companyDetails(company: vm.company)
+                companyDetails(company: vm.company, changePercent: vm.periodChangePercent)
                 picker(selectedPeriod: $vm.selectedPeriod)
                 Chart(
                     prices: vm.prices,
@@ -117,6 +117,7 @@ struct headr1: View {
 
 struct companyDetails: View {
     let company: Company
+    let changePercent: Double
 
     var body: some View {
         VStack {
@@ -146,11 +147,11 @@ struct companyDetails: View {
             HStack(alignment: .bottom) {
                 Spacer()
 
-                Text(company.stock.changePercent >= 0
-                     ? "+\(String(format: "%.2f", company.stock.changePercent))%"
-                     : "\(String(format: "%.2f", company.stock.changePercent))%")
+                Text(changePercent >= 0
+                     ? "+\(String(format: "%.2f", changePercent))%"
+                     : "\(String(format: "%.2f", changePercent))%")
                     .font(.system(size: 16))
-                    .foregroundStyle(company.stock.changePercent >= 0 ? .greenApp : .redApp)
+                    .foregroundStyle(changePercent >= 0 ? .greenApp : .redApp)
 
                 Text("\(company.stock.currentPrice, specifier: "%.2f")")
                     .font(.system(size: 34, weight: .bold))
@@ -435,13 +436,37 @@ private func summaryRow(title: String, value: String) -> some View {
                 changePercent: 2.10,
                 statistics: Statistics(
                     previousClose: 121.45,
-                    openPrice: 121.0,
-                    dayHigh: 126.0,
-                    dayLow: 119.0,
+                    openPrice: 118.0,
+                    dayHigh: 124.0,
+                    dayLow: 118.0,
                     volumeTraded: 2300000,
                     tradingValue: 285200000,
                     numberOfTrades: 23302,
                     averageTradeSize: 12240
+                )
+            ),
+            chartData: ChartData(
+                timeframes: Timeframes(
+                    oneDay: [
+                        PricePoint(timestamp: "2026-05-12T09:00:00Z", price: 118.0),
+                        PricePoint(timestamp: "2026-05-12T11:00:00Z", price: 121.5),
+                        PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)
+                    ],
+                    oneWeek: [
+                        PricePoint(timestamp: "2026-05-06T14:00:00Z", price: 115.0),
+                        PricePoint(timestamp: "2026-05-09T14:00:00Z", price: 117.5),
+                        PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)
+                    ],
+                    oneMonth: [
+                        PricePoint(timestamp: "2026-04-13T14:00:00Z", price: 108.0),
+                        PricePoint(timestamp: "2026-04-29T14:00:00Z", price: 114.3),
+                        PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)
+                    ],
+                    oneYear: [
+                        PricePoint(timestamp: "2025-05-12T14:00:00Z", price: 88.0),
+                        PricePoint(timestamp: "2026-01-12T14:00:00Z", price: 112.0),
+                        PricePoint(timestamp: "2026-05-12T14:00:00Z", price: 124.0)
+                    ]
                 )
             )
         )

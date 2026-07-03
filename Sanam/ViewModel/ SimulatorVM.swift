@@ -72,14 +72,22 @@ class CompanyDetailViewModel: ObservableObject {
     var prices: [Double] {
         switch selectedPeriod {
         case "اسبوع":
-            return [118, 119.2, 121.5, 120.3, 122.8, 124]
+            return company.chartData.timeframes.oneWeek.map { $0.price }
         case "شهر":
-            return [110, 114, 116, 121, 119, 124]
+            return company.chartData.timeframes.oneMonth.map { $0.price }
         case "سنه":
-            return [94, 101, 108, 112, 117, 124]
+            return company.chartData.timeframes.oneYear.map { $0.price }
         default:
-            return [118, 119.2, 121.5, 120.3, 122.8, 124]
+            return company.chartData.timeframes.oneDay.map { $0.price }
         }
+    }
+
+    var periodChangePercent: Double {
+        let baseline = selectedPeriod == "يوم"
+            ? company.stock.statistics.previousClose
+            : prices.first ?? company.stock.currentPrice
+        guard baseline != 0 else { return 0 }
+        return (company.stock.currentPrice - baseline) / baseline * 100
     }
 
     var xLabels: [String] {
