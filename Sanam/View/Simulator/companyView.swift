@@ -356,6 +356,7 @@ struct summary: View {
     let company: Company
     let periodHigh: Double
     let periodLow: Double
+    @State private var showInfo = false
 
     var body: some View {
         VStack(spacing: 16) {
@@ -363,7 +364,7 @@ struct summary: View {
                 Spacer()
 
                 Button {
-                    // showInfo = true
+                    showInfo = true
                 } label: {
                     ZStack {
                         Circle()
@@ -375,6 +376,12 @@ struct summary: View {
                             .foregroundColor(.textApp)
                     }
                     .glassEffect()
+                }
+                .sheet(isPresented: $showInfo) {
+                    StatisticsInfoSheet()
+                        .presentationDetents([.height(560)])
+                        .presentationBackground(.black)
+                        .presentationDragIndicator(.visible)
                 }
             }
 
@@ -407,6 +414,52 @@ struct summary: View {
         }
         .padding()
     }
+}
+
+//MARK: - StatisticsInfoSheet
+
+private struct StatisticsInfoSheet: View {
+    var body: some View {
+        ZStack {
+            Background()
+
+            VStack(spacing: 24) {
+                Text("معلومات")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(.textApp)
+                    .padding(.top, 20)
+
+                ScrollView {
+                    VStack(alignment: .trailing, spacing: 22) {
+                        infoRow(term: "إغلاق سابق", definition: "آخر سعر بيع به السهم بنهاية يوم التداول الأمس.")
+                        infoRow(term: "افتتاح", definition: "أول سعر بدأ به السهم قيمته مع بداية تداول اليوم.")
+                        infoRow(term: "الأعلى", definition: "أعلى قيمة سعرية وصل إليها السهم خلال جلسة اليوم.")
+                        infoRow(term: "الأدنى", definition: "أقل قيمة سعرية هبط إليها السهم خلال جلسة اليوم.")
+                        infoRow(term: "عدد الصفقات", definition: "مجموع عمليات البيع والشراء الناجحة التي تمت اليوم.")
+                        infoRow(term: "متوسط الصفقة", definition: "معدل قيمة الصفقة الواحدة من إجمالي التداول اليوم.")
+                        infoRow(term: "الكمية المتداولة", definition: "إجمالي عدد الأسهم التي تم تداولها بين البائعين والمشترين اليوم.")
+                        infoRow(term: "القيمة المتداولة", definition: "مجموع المبالغ المالية والكاش التي دفعت في كل صفقات اليوم.")
+                    }
+                    .padding(.horizontal, 28)
+                    .padding(.bottom, 30)
+                }
+            }
+        }
+    }
+}
+
+private func infoRow(term: String, definition: String) -> some View {
+    (
+        Text("• \(term): ")
+            .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+            .fontWeight(.semibold)
+        +
+        Text(definition)
+            .foregroundColor(.textApp)
+    )
+    .font(.system(size: 16))
+    .multilineTextAlignment(.trailing)
+    .frame(maxWidth: .infinity, alignment: .trailing)
 }
 
 private func compactNumber(_ value: Double) -> String {
