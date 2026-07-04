@@ -9,12 +9,14 @@ import Charts
 struct InvestmentLevelView: View {
 
     @StateObject private var vm = InvestmentViewModel()
+    @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
+    @State private var showReward = false
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             if colorScheme == .dark {
                 Color(.systemBackground)
                     .ignoresSafeArea()
@@ -60,20 +62,26 @@ struct InvestmentLevelView: View {
                     .frame(width: 316, height: 72)
 
                 Spacer().frame(height: 32)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                PrimaryButton(title: "كمل") {
+            LevelDoneButton {
+                showReward = true
+            }
+
+            if showReward {
+                PortfolioCongratsView(vm: rewardVM, onFinished: {
                     if levelsVM.currentLevel <= 2 {
                         levelsVM.currentLevel = 3
                     }
                     dismiss()
-                }
-                .frame(width: 358)
-
-                Spacer().frame(height: 12)
+                })
+                .transition(.opacity.combined(with: .scale))
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 8)
         }
+        .animation(.easeInOut(duration: 0.4), value: showReward)
         .environment(\.layoutDirection, .rightToLeft)
         .navigationTitle("فاهم اللعبه")
     }

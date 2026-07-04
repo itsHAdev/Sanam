@@ -10,11 +10,13 @@ import SceneKit
 
 struct ContentView: View {
     @StateObject private var vm = CubeViewModel()
+    @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
+    @State private var showCongrats = false
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             Color(.systemBackground)
                 .ignoresSafeArea()
                 .overlay(
@@ -23,21 +25,6 @@ struct ContentView: View {
                         .scaledToFill()
                         .ignoresSafeArea()
                 )
-
-            // زر "انتهيت" في الأسفل
-            VStack {
-                Spacer()
-                if vm.showDoneButton {
-                    PrimaryButton(title: "انتهيت", action: {
-                        if levelsVM.currentLevel <= 1 {
-                            levelsVM.currentLevel = 2
-                        }
-                        dismiss()
-                    })
-                    .padding(.bottom, 20)
-                    .transition(.opacity)
-                }
-            }
 
             // المحتوى الرئيسي
             VStack(spacing: 0) {
@@ -65,7 +52,26 @@ struct ContentView: View {
 
                 Spacer()
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            if vm.showDoneButton {
+                LevelDoneButton(action: {
+                    showCongrats = true
+                })
+                .transition(.opacity)
+            }
+
+            if showCongrats {
+                PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    if levelsVM.currentLevel <= 1 {
+                        levelsVM.currentLevel = 2
+                    }
+                    dismiss()
+                })
+                .transition(.opacity.combined(with: .scale))
+            }
         }
+        .animation(.easeInOut(duration: 0.4), value: showCongrats)
         .environment(\.layoutDirection, .rightToLeft)
         .animation(.easeInOut(duration: 0.3), value: vm.currentFace)
         .navigationTitle("المستثمر المبتدئ")

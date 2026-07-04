@@ -7,12 +7,14 @@ import SwiftUI
 
 struct StockTypeLevelView: View {
     @StateObject private var vm = StockTypeLevelViewModel()
+    @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
     @EnvironmentObject var simulatorVM: SimulatorViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var showReward = false
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             Color(.systemBackground)
                 .ignoresSafeArea()
                 .overlay(
@@ -104,21 +106,19 @@ struct StockTypeLevelView: View {
                         .buttonStyle(.plain)
                     }
 
-                    if vm.visitedSpeculative && vm.visitedSafe {
-                        PrimaryButton(title: "خلصت") {
-                            if levelsVM.currentLevel <= 4 {
-                                levelsVM.currentLevel = 5
-                            }
-                            dismiss()
-                        }
-                        .padding(.top, 8)
-                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 8)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onAppear {
                 vm.setCompany(simulatorVM.companies.randomElement())
+            }
+
+            if vm.visitedSpeculative && vm.visitedSafe {
+                LevelDoneButton {
+                    showReward = true
+                }
             }
 
             if let selected = vm.selectedCard {
@@ -132,10 +132,23 @@ struct StockTypeLevelView: View {
                     }
 
                 popupContent(for: selected)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.scale.combined(with: .opacity))
                     .zIndex(1)
             }
+
+            if showReward {
+                PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    if levelsVM.currentLevel <= 4 {
+                        levelsVM.currentLevel = 5
+                    }
+                    dismiss()
+                })
+                .transition(.opacity.combined(with: .scale))
+                .zIndex(2)
+            }
         }
+        .animation(.easeInOut(duration: 0.4), value: showReward)
         .navigationTitle("المستثمر الذكي")
         .navigationBarTitleDisplayMode(.inline)
     }

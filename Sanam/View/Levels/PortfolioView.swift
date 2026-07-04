@@ -112,8 +112,6 @@ struct PortfolioMainView: View {
             }
 
             confirmBtn
-                .padding(.horizontal, 16)
-                .padding(.bottom, 36)
         }
     }
 
@@ -271,10 +269,9 @@ struct PortfolioMainView: View {
                      vm.selectedTabIDs.allSatisfy { id in
                          vm.sectors.first(where: { $0.id == id })?.allocation ?? 0 > 0
                      }
-        return PrimaryButton(title: "خلصت توزيع") {
+        return LevelDoneButton {
             if hasAny { vm.confirm() }
         }
-        .padding(.bottom, 2)
         .disabled(!hasAny)
         .opacity(hasAny ? 1.0 : 0.4)
         .animation(.easeInOut(duration: 0.2), value: hasAny)

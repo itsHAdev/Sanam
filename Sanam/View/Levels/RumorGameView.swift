@@ -8,11 +8,13 @@ import SwiftUI
 struct RumorGameView: View {
 
     @StateObject private var vm = RumorGameViewModel()
+    @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var showReward = false
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             Color(.systemBackground)
                 .ignoresSafeArea()
                 .overlay(
@@ -26,7 +28,25 @@ struct RumorGameView: View {
                 content
                     .padding(.top, 8)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            if vm.showSuccess {
+                LevelDoneButton {
+                    showReward = true
+                }
+            }
+
+            if showReward {
+                PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    if levelsVM.currentLevel <= 3 {
+                        levelsVM.currentLevel = 4
+                    }
+                    dismiss()
+                })
+                .transition(.opacity.combined(with: .scale))
+            }
         }
+        .animation(.easeInOut(duration: 0.4), value: showReward)
         .navigationTitle("أسطورة الأسهم")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -129,14 +149,6 @@ struct RumorGameView: View {
                     }
                     .padding(.horizontal, 16)
 
-                PrimaryButton(title: "انتهيت") {
-                    if levelsVM.currentLevel <= 3 {
-                        levelsVM.currentLevel = 4
-                    }
-                    dismiss()
-                }
-                .padding(.horizontal, 32)
-                .padding(.top, 24)
             }
         }
     }
