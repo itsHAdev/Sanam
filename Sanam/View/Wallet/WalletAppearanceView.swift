@@ -26,7 +26,7 @@ struct WalletAppearanceView: View {
 
     var body: some View {
         ZStack {
-            Color(.systemBackground).ignoresSafeArea()
+            Background()
 
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {

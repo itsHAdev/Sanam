@@ -15,14 +15,7 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            Color(.backApp)
-                .ignoresSafeArea()
-                .overlay(
-                    Image("backFrame")
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                )
+            Background()
 
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {
@@ -214,14 +207,7 @@ struct PrivacySecurityView: View {
 
     var body: some View {
         ZStack {
-            Color(.systemBackground)
-                .ignoresSafeArea()
-                .overlay(
-                    Image("backFrame")
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                )
+            Background()
 
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {

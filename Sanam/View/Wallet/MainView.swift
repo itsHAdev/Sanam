@@ -14,14 +14,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                Color(.backApp)
-                    .ignoresSafeArea()
-                    .overlay(
-                        Image("backFrame")
-                            .resizable()
-                            .scaledToFill()
-                            .ignoresSafeArea()
-                    )
+               Background()
 
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 32) {

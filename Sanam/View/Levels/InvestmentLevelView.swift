@@ -19,14 +19,7 @@ struct InvestmentLevelView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             if colorScheme == .dark {
-                Color(.systemBackground)
-                    .ignoresSafeArea()
-                    .overlay(
-                        Image("backFrame")
-                            .resizable()
-                            .scaledToFill()
-                            .ignoresSafeArea()
-                    )
+                Background()
             } else {
                 Color(.systemBackground)
                     .overlay(Color.blue.opacity(0.06))

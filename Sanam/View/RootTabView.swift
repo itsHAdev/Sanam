@@ -37,14 +37,7 @@ struct RootTabView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(.systemBackground)
-                    .ignoresSafeArea()
-                    .overlay(
-                        Image("backFrame")
-                            .resizable()
-                            .scaledToFill()
-                            .ignoresSafeArea()
-                    )
+                Background()
 
                 TabView(selection: Binding(
                     get: { TabItem(rawValue: selectedTab) ?? .portfolio },

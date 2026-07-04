@@ -36,14 +36,7 @@ struct LevelsView: View {
             }
         }
         .background(
-            Color(.systemBackground)
-                .ignoresSafeArea()
-                .overlay(
-                    Image("backFrame")
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                )
+            Background()
         )
         .environment(\.layoutDirection, .rightToLeft)
     }

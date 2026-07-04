@@ -49,14 +49,7 @@ struct PortfolioMainView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Color(.systemBackground)
-                .ignoresSafeArea()
-                .overlay(
-                    Image("backFrame")
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                )
+            Background()
 
             ScrollView(showsIndicators: false) {
 
