@@ -128,9 +128,12 @@ struct LevelsListView: View {
 
     @ViewBuilder
     func destinationView(for id: Int) -> some View {
-        if id == 1 {
+        switch id {
+        case 1:
             ContentView(levelsVM: vm)
-        } else {
+        case 2:
+            InvestmentLevelView(levelsVM: vm)
+        default:
             LevelComingSoonView(level: vm.levels.first(where: { $0.id == id }))
         }
     }
