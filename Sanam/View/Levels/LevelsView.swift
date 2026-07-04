@@ -128,7 +128,11 @@ struct LevelsListView: View {
 
     @ViewBuilder
     func destinationView(for id: Int) -> some View {
-        LevelComingSoonView(level: vm.levels.first(where: { $0.id == id }))
+        if id == 1 {
+            ContentView(levelsVM: vm)
+        } else {
+            LevelComingSoonView(level: vm.levels.first(where: { $0.id == id }))
+        }
     }
 }
 
