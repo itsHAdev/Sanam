@@ -333,4 +333,6 @@ struct DiamondView: View {
     NavigationStack {
         LevelsView()
     }
+    .environmentObject(SimulatorViewModel())
+    .environmentObject(WalletViewModel())
 }

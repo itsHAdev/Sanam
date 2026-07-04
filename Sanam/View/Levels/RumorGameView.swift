@@ -10,6 +10,7 @@ struct RumorGameView: View {
     @StateObject private var vm = RumorGameViewModel()
     @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
+    @EnvironmentObject var walletVM: WalletViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showReward = false
 
@@ -38,6 +39,7 @@ struct RumorGameView: View {
 
             if showReward {
                 PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    walletVM.collectReward(forLevel: 3)
                     if levelsVM.currentLevel <= 3 {
                         levelsVM.currentLevel = 4
                     }
@@ -527,4 +529,5 @@ struct RumorGameView: View {
     NavigationStack {
         RumorGameView(levelsVM: LevelsViewModel())
     }
+    .environmentObject(WalletViewModel())
 }

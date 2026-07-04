@@ -162,7 +162,7 @@ struct headr: View{
                         .foregroundStyle(.textApp)
                 }//z
             }
-            .glassEffect()
+            .glassEffect(in: Circle())
             
             Spacer()
             

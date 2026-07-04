@@ -12,6 +12,7 @@ struct ContentView: View {
     @StateObject private var vm = CubeViewModel()
     @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
+    @EnvironmentObject var walletVM: WalletViewModel
     @State private var showCongrats = false
     @Environment(\.dismiss) private var dismiss
 
@@ -63,6 +64,7 @@ struct ContentView: View {
 
             if showCongrats {
                 PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    walletVM.collectReward(forLevel: 1)
                     if levelsVM.currentLevel <= 1 {
                         levelsVM.currentLevel = 2
                     }
@@ -333,4 +335,5 @@ struct CubeView: UIViewRepresentable {
 
 #Preview {
     ContentView(levelsVM: LevelsViewModel())
+        .environmentObject(WalletViewModel())
 }

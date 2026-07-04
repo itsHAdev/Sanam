@@ -9,6 +9,7 @@ import SwiftUI
 struct PortfolioRootView: View {
     @StateObject private var vm = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
+    @EnvironmentObject var walletVM: WalletViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var isLeaving = false
 
@@ -18,6 +19,7 @@ struct PortfolioRootView: View {
 
             if vm.showCongrats {
                 PortfolioCongratsView(vm: vm, onFinished: {
+                    walletVM.collectReward(forLevel: 5)
                     if levelsVM.currentLevel <= 5 {
                         levelsVM.currentLevel = 6
                     }
@@ -509,4 +511,5 @@ struct Triangle: Shape {
 
 #Preview {
     PortfolioRootView(levelsVM: LevelsViewModel())
+        .environmentObject(WalletViewModel())
 }

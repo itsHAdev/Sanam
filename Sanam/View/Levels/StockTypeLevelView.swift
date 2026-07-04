@@ -10,6 +10,7 @@ struct StockTypeLevelView: View {
     @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
     @EnvironmentObject var simulatorVM: SimulatorViewModel
+    @EnvironmentObject var walletVM: WalletViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showReward = false
 
@@ -139,6 +140,7 @@ struct StockTypeLevelView: View {
 
             if showReward {
                 PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    walletVM.collectReward(forLevel: 4)
                     if levelsVM.currentLevel <= 4 {
                         levelsVM.currentLevel = 5
                     }
@@ -406,5 +408,6 @@ struct LiveChartWithAxes: View {
     NavigationStack {
         StockTypeLevelView(levelsVM: LevelsViewModel())
             .environmentObject(SimulatorViewModel())
+            .environmentObject(WalletViewModel())
     }
 }

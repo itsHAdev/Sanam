@@ -103,6 +103,7 @@ struct companyView: View {
 
 struct headr1: View {
     let company: Company
+    @EnvironmentObject var walletVM: WalletViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -150,7 +151,7 @@ struct headr1: View {
 
                         Spacer().frame(width: 12)
 
-                        Text("٠٠.٠٠")
+                        Text(arabicNumerals(String(Int(walletVM.balance))))
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundStyle(.textApp)
                     }//h

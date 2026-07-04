@@ -59,6 +59,9 @@ struct TradeSheet: View {
                             
                             Button {
                                 isBuy = false
+                                if quantity > ownedShares {
+                                    quantity = max(ownedShares, 1)
+                                }
                             } label: {
                                 Text("بيع")
                                     .font(.system(size: 14, weight: .medium))
@@ -116,7 +119,9 @@ struct TradeSheet: View {
                                 .foregroundColor(.white)
 
                             Button {
-                                quantity += 1
+                                if isBuy || quantity < ownedShares {
+                                    quantity += 1
+                                }
                             } label: {
                                 Image(systemName: "plus")
                                     .font(.system(size: 17,weight: .semibold))

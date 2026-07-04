@@ -11,6 +11,7 @@ struct InvestmentLevelView: View {
     @StateObject private var vm = InvestmentViewModel()
     @StateObject private var rewardVM = PortfolioViewModel()
     @ObservedObject var levelsVM: LevelsViewModel
+    @EnvironmentObject var walletVM: WalletViewModel
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @State private var showReward = false
@@ -73,6 +74,7 @@ struct InvestmentLevelView: View {
 
             if showReward {
                 PortfolioCongratsView(vm: rewardVM, onFinished: {
+                    walletVM.collectReward(forLevel: 2)
                     if levelsVM.currentLevel <= 2 {
                         levelsVM.currentLevel = 3
                     }
@@ -310,4 +312,5 @@ struct CustomGradientSlider: View {
 
 #Preview {
     InvestmentLevelView(levelsVM: LevelsViewModel())
+        .environmentObject(WalletViewModel())
 }
