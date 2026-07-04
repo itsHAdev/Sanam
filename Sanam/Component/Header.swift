@@ -7,17 +7,22 @@ import SwiftUI
 
 //MARK: - Header 1 Button and Big tittle
 
-struct Headr1: View{
-    
+import SwiftUI
+
+struct Header1<Destination: View>: View {
+
     let title: String
     let icon: String
-    let action: () -> Void
-    var body: some View {
-        
-        HStack{
-            
-            Button(action: action) {
+    let destination: Destination
 
+    var body: some View {
+
+        HStack {
+
+            NavigationLink {
+                destination
+                    .navigationBarBackButtonHidden(true)
+            } label: {
                 ZStack {
                     Circle()
                         .fill(.clear)
@@ -26,16 +31,15 @@ struct Headr1: View{
                     Image(systemName: icon)
                         .font(.system(size: 22))
                         .foregroundStyle(.textApp)
-                }//z
+                }
             }
             .glassEffect()
-            
+
             Spacer()
-            
+
             Text(title)
-                .font(.system(size: 34,weight: .bold))
-            
-        }//h
+                .font(.system(size: 34, weight: .bold))
+        }
     }
 }
 

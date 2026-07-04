@@ -22,35 +22,36 @@ struct WalletCardView: View {
             VStack(spacing: isPreview ? 4 : 8) {
                 Text("دراهمك الافتراضية")
                     .font(.system(size: isPreview ? 14 : 14, weight: .bold))
-                    .foregroundColor(.white)
-                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
+                    .foregroundColor(theme.textColor)
+                    .shadow(color: Color.black.opacity(0.7), radius: 4, x: 0, y: 4)
                     .frame(maxWidth: .infinity, alignment: .center)
 
                 Text(arabicNumerals(String(Int(walletVM.balance))))
-                    .font(.system(size: isPreview ? 40 : 48, weight: .bold))
-                    .shadow(color: Color.black, radius: 4, x: 0, y: 4)
-                    .foregroundColor(.white)
+                    .font(.system(size: isPreview ? 40 : 40, weight: .black))
+                    .shadow(color: Color.black.opacity(0.7), radius: 4, x: 0, y: 4)
+                    .foregroundColor(theme.textColor)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
             VStack {
                 Spacer()
-                HStack(spacing: isPreview ? 2 : 4) {
+                HStack(spacing: isPreview ? 10 : 10) {
                     Spacer()
                     Text(holderName)
-                        .font(.system(size: isPreview ? 12 : 14, weight: .semibold))
-                        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
-                        .foregroundColor(.white)
+                        .font(.system(size: isPreview ? 12 : 12, weight: .semibold))
+                        .shadow(color: Color.black, radius: 4, x: 0, y: 4)
+                        .foregroundColor(theme.textColor)
                         .padding(.trailing, isPreview ? -7 : -7)
 
-                    Image("WhiteCamel")
+                    Image(theme.camelColor)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: isPreview ? 24 : 32, height: isPreview ? 24 : 32)
+                        .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
+                        .frame(width: isPreview ? 24 : 27, height: isPreview ? 17 : 19)
                 }
-                .padding(.trailing, isPreview ? 12 : 16)
-                .padding(.bottom, isPreview ? 12 : 16)
+                .padding(.trailing, isPreview ? 20 : 20)
+                .padding(.bottom, isPreview ? 20 : 20)
             }
         }
         .frame(
@@ -84,7 +85,7 @@ struct ThemeOptionRow: View {
                 if isSelected {
                     ZStack {
                         Circle()
-                            .fill(Color.darkBlue)
+                            .fill(Color.lightBlue)
                             .frame(width: 32, height: 32)
                             .overlay(Circle().stroke(Color.white.opacity(0.25), lineWidth: 1))
                             .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
@@ -106,7 +107,7 @@ struct ThemeOptionRow: View {
 
 #Preview {
     WalletCardView(
-        theme: CardTheme.allThemes[0],
+        theme: CardTheme.allThemes[3],
         holderName: "مستخدم سنام"
     )
     .environmentObject(WalletViewModel())

@@ -3,9 +3,13 @@
 //  Sanam
 //
 
+//  Created by Hadeel on 02/07/2026.
+//
+
 import SwiftUI
 
 struct SettingsView: View {
+
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var walletVM: WalletViewModel
 
@@ -122,12 +126,14 @@ struct SettingsView: View {
                 }
             } label: {
                 HStack(spacing: 4) {
-                    Text("نمط الظهور")
-                        .font(.system(size: 16))
-                        .foregroundColor(.textApp)
                     Text("(\(walletVM.appAppearance.title))")
                         .font(.system(size: 16))
                         .foregroundColor(.grayApp)
+                    
+                    Text("نمط الظهور")
+                        .font(.system(size: 16))
+                        .foregroundColor(.textApp)
+                  
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }

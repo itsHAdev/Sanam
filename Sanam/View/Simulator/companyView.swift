@@ -404,6 +404,7 @@ struct summary: View {
     let company: Company
     let periodHigh: Double
     let periodLow: Double
+    
     @State private var showInfo = false
 
     var body: some View {
@@ -459,8 +460,15 @@ struct summary: View {
                     summaryRow(title: "الأدنى", value: arabicNumerals(String(format: "%.2f", periodLow)))
                 }
             }
-        }
+        }//v
         .padding()
+        
+        .sheet(isPresented: $showInfo) {
+            infoButton()
+                .presentationDetents([.height(600)])
+                .presentationBackground(.black)
+                .presentationDragIndicator(.visible)
+        }
     }
 }
 
@@ -547,6 +555,102 @@ private func summaryRow(title: String, value: String) -> some View {
             .font(.system(size: 10, weight: .regular))
             .frame(width: 60, alignment: .trailing)
             .foregroundColor(.gray)
+    }
+}
+
+//MARK: - infoButton
+
+struct infoButton: View {
+    var body: some View {
+        
+        VStack(alignment: .center){
+            
+            Text("معلومات")
+                .font(.system(size: 18))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+            
+            Spacer().frame(height: 32)
+            
+            VStack(alignment: .trailing, spacing: 22) {
+               
+                (
+                    Text("• إغلاق سابق: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("آخر سعر بيع به السهم بنهاية يوم التداول الأمس.")
+                        .foregroundColor(.white)
+                )//1
+                
+                (
+                    Text("• إفتتاح: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("أول سعر بدأ به السهم قيمته مع بداية تداول اليوم.")
+                        .foregroundColor(.white)
+                )//2
+                
+                (
+                    Text("• الأعلى: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("أعلى قيمة سعرية وصل إليها السهم خلال جلسة اليوم.")
+                        .foregroundColor(.white)
+                )//3
+                
+                
+                (
+                    Text("• الأدنى: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("أقل قيمة سعرية هبط إليها السهم خلال جلسة اليوم.")
+                        .foregroundColor(.white)
+                )//4
+                
+                (
+                    Text("• عدد الصفقات: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("مجموع عمليات البيع والشراء الناجحة التي تمت اليوم.")
+                        .foregroundColor(.white)
+                )//5
+                
+                (
+                    Text("• متوسط كمية الصفقة: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("معدل عدد الأسهم المتبادلة في العملية الواحدة.")
+                        .foregroundColor(.white)
+                )//6
+                
+                (
+                    Text("• الكمية المتداولة: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("إجمالي عدد الأسهم التي تم تداولها بين البائعين والمشترين اليوم.")
+                        .foregroundColor(.white)
+                )//7
+                
+                
+                (
+                    Text("• القيمة المتداولة: ")
+                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+                        .fontWeight(.semibold)
+                    +
+                    Text("مجموع المبالغ المالية والكاش التي دفعت في كل صفقات اليوم.")
+                        .foregroundColor(.white)
+                )//8
+            }//vMain
+            .multilineTextAlignment(.trailing)
+        }//v
+        .padding()
     }
 }
 

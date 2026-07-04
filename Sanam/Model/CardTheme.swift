@@ -9,6 +9,7 @@ struct CardTheme: Identifiable, Equatable {
     let id: Int
     let name: String
     let backgroundImage: String
+    let camelColor: String
     let textColor: Color
     let accentColor: Color
 }
@@ -19,6 +20,7 @@ extension CardTheme {
             id: 0,
             name: "الكلاسيكي الداكن",
             backgroundImage: "DefaultCard",
+            camelColor: "WhiteCamel",
             textColor: .white,
             accentColor: .darkBlue
         ),
@@ -26,6 +28,7 @@ extension CardTheme {
             id: 1,
             name: "الوطني السعودي",
             backgroundImage: "SaudiCard",
+            camelColor: "WhiteCamel",
             textColor: .white,
             accentColor: .darkGreen
         ),
@@ -33,6 +36,7 @@ extension CardTheme {
             id: 2,
             name: "الوردي اللامع",
             backgroundImage: "PingGlitterCard",
+            camelColor: "WhiteCamel",
             textColor: .white,
             accentColor: .redApp
         ),
@@ -40,8 +44,9 @@ extension CardTheme {
             id: 3,
             name: "الماتشا",
             backgroundImage: "MatchaCard",
-            textColor: .white,
-            accentColor: .greenApp
+            camelColor: "GreenCamel",
+            textColor: .darkGreen,
+            accentColor: .darkGreen
         ),
     ]
 }

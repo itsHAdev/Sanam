@@ -17,6 +17,9 @@ struct SanamApp: App {
             RootTabView()
                 .environmentObject(simulatorVM)
                 .environmentObject(walletVM)
+            NavigationStack {
+             
+            }
         }
     }
 }
