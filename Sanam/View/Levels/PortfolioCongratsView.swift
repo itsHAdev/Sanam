@@ -26,21 +26,27 @@ struct PortfolioCongratsView: View {
                 .frame(width: 184, height: 190)
                 .blur(radius: 50)
                 .shadow(color: Color(red: 0.690, green: 0.910, blue: 0.992), radius: 125)
-                .offset(y: -80)
+                .offset(y: -260)
                 .allowsHitTesting(false)
 
-            VStack(spacing: 0) {
+            VStack{
+                
+                Spacer()
 
                 Text("مبروك!")
-                    .font(.system(size: 48, weight: .black))
+                    .font(.system(size: 55, weight: .semibold))
                     .foregroundColor(.white)
                     .padding(.top, 24)
+                
+               
 
                 Text("لإنك كفو تستاهل")
-                    .font(.system(size: 22, weight: .medium))
+                    .font(.system(size: 28, weight: .medium))
                     .foregroundColor(Color(red: 0.412, green: 0.467, blue: 0.569))
                     .padding(.top, 4)
 
+                Spacer()
+                
                 ZStack {
                     Circle()
                         .fill(Color(red: 0.67, green: 0.74, blue: 0.89).opacity(0.1))
@@ -59,16 +65,20 @@ struct PortfolioCongratsView: View {
                 }
                 .padding(.vertical, 10)
 
+                Spacer()
+                
                 Text(arabicNumerals("+100"))
-                    .font(.system(size: 70, weight: .black))
+                    .font(.system(size: 99, weight: .semibold))
                     .foregroundColor(.white)
 
+                Spacer().frame(height: -20)
+                
                 Text("سنام مكافأة لك")
-                    .font(.system(size: 16, weight: .regular))
+                    .font(.system(size: 22))
                     .foregroundColor(Color(red: 0.412, green: 0.467, blue: 0.569))
                     .padding(.top, 2)
 
-                Spacer(minLength: 0)
+                Spacer()
 
                 Button(action: {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
@@ -102,7 +112,7 @@ struct PortfolioCongratsView: View {
                 .padding(.bottom, 32)
             }
             .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height * 0.65)
+            .frame(height: UIScreen.main.bounds.height * 0.75)
             .background(
                 ZStack {
                     UnevenRoundedRectangle(

@@ -14,12 +14,11 @@ struct SanamApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootTabView()
-                .environmentObject(simulatorVM)
-                .environmentObject(walletVM)
             NavigationStack {
-             
+                RootTabView()
             }
+            .environmentObject(simulatorVM)
+            .environmentObject(walletVM)
         }
     }
 }

@@ -124,7 +124,7 @@ struct SmallButton: View {
                 
                 Text(title)
                     .font(.system(size: 14,weight: .semibold))
-                    .foregroundStyle(.textApp)
+                    .foregroundStyle(.white)
             
             }//z
         }//b

@@ -59,7 +59,7 @@ struct companyView: View {
                     .padding(.top, 50)
 
                     Spacer()
-                }
+                }.padding(.horizontal,20)
                 .zIndex(999)
             }
 
@@ -91,7 +91,7 @@ struct companyView: View {
                     .presentationBackground(.black)
                     .presentationDragIndicator(.visible)
                 }
-            }
+            }.padding(.horizontal,16)
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -206,7 +206,7 @@ struct companyDetails: View {
                     .foregroundStyle(.textApp)
             }//h
         }//vMain
-        .padding()
+        .padding(.horizontal,16)
     }
 }
 
@@ -226,12 +226,12 @@ struct picker: View {
                         Text(item)
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.textApp)
-                            .frame(maxWidth: .infinity)
+                            .frame(width: 100,alignment: .center)
                             .padding(.vertical, 6)
                     }
                 }
             }//h
-            .frame(width: 370, height: 36)
+            .frame(width: 350, height: 36).padding(.horizontal,16)
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 900)
@@ -269,7 +269,7 @@ struct Chart: View {
             prices: prices,
             xLabels: xLabels
         )
-        .frame(width: 390, height: 220)
+        .frame(width: 360, height: 220)
     }
 }
 
@@ -404,7 +404,7 @@ struct summary: View {
     let company: Company
     let periodHigh: Double
     let periodLow: Double
-    
+
     @State private var showInfo = false
 
     var body: some View {
@@ -412,6 +412,7 @@ struct summary: View {
             HStack {
                 Spacer()
 
+                //infoButton
                 Button {
                     showInfo = true
                 } label: {
@@ -427,13 +428,14 @@ struct summary: View {
                     .glassEffect()
                 }
                 .sheet(isPresented: $showInfo) {
-                    StatisticsInfoSheet()
+                    infoSheet()
                         .presentationDetents([.height(560)])
                         .presentationBackground(.black)
                         .presentationDragIndicator(.visible)
                 }
             }
 
+            //summry
             HStack(alignment: .top, spacing: 16) {
                 VStack(alignment: .trailing, spacing: 16) {
                     summaryRow(title: "الكمية المتداولة", value: arabicNumerals(compactNumber(Double(company.stock.statistics.volumeTraded))))
@@ -461,10 +463,10 @@ struct summary: View {
                 }
             }
         }//v
-        .padding()
+        .padding(.horizontal,16)
         
         .sheet(isPresented: $showInfo) {
-            infoButton()
+            infoSheet()
                 .presentationDetents([.height(600)])
                 .presentationBackground(.black)
                 .presentationDragIndicator(.visible)
@@ -472,9 +474,9 @@ struct summary: View {
     }
 }
 
-//MARK: - StatisticsInfoSheet
+//MARK: - infoSheet
 
-private struct StatisticsInfoSheet: View {
+private struct infoSheet: View {
     var body: some View {
         ZStack {
             Background()
@@ -507,7 +509,7 @@ private struct StatisticsInfoSheet: View {
 private func infoRow(term: String, definition: String) -> some View {
     (
         Text("• \(term): ")
-            .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
+            .foregroundColor(.lightBlue)
             .fontWeight(.semibold)
         +
         Text(definition)
@@ -544,113 +546,18 @@ private func compactNumber(_ value: Double) -> String {
 private func summaryRow(title: String, value: String) -> some View {
     HStack {
         Text(value)
-            .font(.system(size: 10, weight: .regular))
-            .foregroundColor(.white.opacity(0.9))
+            .font(.system(size: 10))
+            .foregroundColor(.textApp)
             .lineLimit(1)
-            .frame(width: 40, alignment: .leading)
+            .frame(width: 32, alignment: .leading)
 
         Spacer()
 
         Text(title)
-            .font(.system(size: 10, weight: .regular))
-            .frame(width: 60, alignment: .trailing)
-            .foregroundColor(.gray)
-    }
-}
-
-//MARK: - infoButton
-
-struct infoButton: View {
-    var body: some View {
-        
-        VStack(alignment: .center){
-            
-            Text("معلومات")
-                .font(.system(size: 18))
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.center)
-            
-            Spacer().frame(height: 32)
-            
-            VStack(alignment: .trailing, spacing: 22) {
-               
-                (
-                    Text("• إغلاق سابق: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("آخر سعر بيع به السهم بنهاية يوم التداول الأمس.")
-                        .foregroundColor(.white)
-                )//1
-                
-                (
-                    Text("• إفتتاح: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("أول سعر بدأ به السهم قيمته مع بداية تداول اليوم.")
-                        .foregroundColor(.white)
-                )//2
-                
-                (
-                    Text("• الأعلى: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("أعلى قيمة سعرية وصل إليها السهم خلال جلسة اليوم.")
-                        .foregroundColor(.white)
-                )//3
-                
-                
-                (
-                    Text("• الأدنى: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("أقل قيمة سعرية هبط إليها السهم خلال جلسة اليوم.")
-                        .foregroundColor(.white)
-                )//4
-                
-                (
-                    Text("• عدد الصفقات: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("مجموع عمليات البيع والشراء الناجحة التي تمت اليوم.")
-                        .foregroundColor(.white)
-                )//5
-                
-                (
-                    Text("• متوسط كمية الصفقة: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("معدل عدد الأسهم المتبادلة في العملية الواحدة.")
-                        .foregroundColor(.white)
-                )//6
-                
-                (
-                    Text("• الكمية المتداولة: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("إجمالي عدد الأسهم التي تم تداولها بين البائعين والمشترين اليوم.")
-                        .foregroundColor(.white)
-                )//7
-                
-                
-                (
-                    Text("• القيمة المتداولة: ")
-                        .foregroundColor(Color(red: 0.60, green: 0.69, blue: 0.94))
-                        .fontWeight(.semibold)
-                    +
-                    Text("مجموع المبالغ المالية والكاش التي دفعت في كل صفقات اليوم.")
-                        .foregroundColor(.white)
-                )//8
-            }//vMain
+            .font(.system(size: 10))
+            .foregroundStyle(.grayApp)
+            .frame(width: 65, alignment: .trailing)
             .multilineTextAlignment(.trailing)
-        }//v
-        .padding()
     }
 }
 

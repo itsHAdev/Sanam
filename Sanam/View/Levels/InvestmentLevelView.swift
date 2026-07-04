@@ -26,16 +26,15 @@ struct InvestmentLevelView: View {
                     .ignoresSafeArea()
             }
 
-            VStack(spacing: 0) {
+            VStack {
                 chartCard
                     .frame(width: 358, height: 320)
 
-                Spacer().frame(height: 20)
+                Spacer().frame(height: 32)
 
                 hintRow
                     .frame(maxWidth: .infinity, alignment: .center)
 
-                Spacer().frame(height: 14)
 
                 CustomGradientSlider(value: $vm.marketForce, range: -100...100)
                     .frame(width: 316)
@@ -50,7 +49,7 @@ struct InvestmentLevelView: View {
                 .font(.callout)
                 .frame(width: 316)
 
-                Spacer().frame(height: 16)
+                Spacer().frame(height: 32)
 
                 buyersSellersCard
                     .frame(width: 316, height: 72)

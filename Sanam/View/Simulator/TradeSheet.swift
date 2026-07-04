@@ -24,7 +24,8 @@ struct TradeSheet: View {
             Background()
             VStack{
 
-
+                Spacer().frame(height: 32)
+                
                 Text("صفحة التداول")
                     .font(.system(size: 20,weight: .bold))
                     .foregroundStyle(.textApp)
@@ -109,12 +110,12 @@ struct TradeSheet: View {
                             } label: {
                                 Image(systemName: "minus")
                                     .font(.system(size: 17,weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.textApp)
                             }
 
                             Text(arabicNumerals("\(quantity)"))
                                 .font(.system(size: 22,weight: .medium))
-                                .foregroundColor(.white)
+                                .foregroundColor(.textApp)
 
                             Button {
                                 if isBuy || quantity < ownedShares {
@@ -123,7 +124,7 @@ struct TradeSheet: View {
                             } label: {
                                 Image(systemName: "plus")
                                     .font(.system(size: 17,weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.textApp)
                             }
                         }.padding(.horizontal,16)
                         .background(
