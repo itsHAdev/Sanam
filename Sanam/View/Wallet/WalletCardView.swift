@@ -23,12 +23,12 @@ struct WalletCardView: View {
                 Text("دراهمك الافتراضية")
                     .font(.system(size: isPreview ? 14 : 14, weight: .bold))
                     .foregroundColor(theme.textColor)
-                    .shadow(color: Color.black.opacity(0.7), radius: 4, x: 0, y: 4)
+                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                     .frame(maxWidth: .infinity, alignment: .center)
 
                 Text(arabicNumerals(String(Int(walletVM.balance))))
                     .font(.system(size: isPreview ? 40 : 40, weight: .black))
-                    .shadow(color: Color.black.opacity(0.7), radius: 4, x: 0, y: 4)
+                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                     .foregroundColor(theme.textColor)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
@@ -40,19 +40,38 @@ struct WalletCardView: View {
                     Spacer()
                     Text(holderName)
                         .font(.system(size: isPreview ? 12 : 12, weight: .semibold))
-                        .shadow(color: Color.black, radius: 4, x: 0, y: 4)
+                        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                         .foregroundColor(theme.textColor)
                         .padding(.trailing, isPreview ? -7 : -7)
 
                     Image(theme.camelColor)
                         .resizable()
                         .scaledToFit()
-                        .shadow(color: Color.black.opacity(0.4), radius: 4, x: 0, y: 4)
+                        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                         .frame(width: isPreview ? 24 : 27, height: isPreview ? 17 : 19)
                 }
                 .padding(.trailing, isPreview ? 20 : 20)
                 .padding(.bottom, isPreview ? 20 : 20)
             }
+            
+            //plus button to snamMarket
+            NavigationLink{
+                SanamMarket()
+                    .navigationBarBackButtonHidden(true)
+            }label: {
+                ZStack{
+                    Circle()
+                        .frame(width: 23,height: 23)
+                        .foregroundStyle(.clear)
+                        .glassEffect()
+                    
+                    Image(systemName: "plus")
+                        .font(.system(size: 14,weight: .medium))
+                        .foregroundStyle(theme.textColor)
+                }//z
+                
+                
+            } .offset(x: -40,y: 10)
         }
         .frame(
             width: isPreview ? nil : UIScreen.main.bounds.width - 48,
