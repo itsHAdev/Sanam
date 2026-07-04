@@ -133,6 +133,8 @@ struct LevelsListView: View {
             ContentView(levelsVM: vm)
         case 2:
             InvestmentLevelView(levelsVM: vm)
+        case 3:
+            RumorGameView(levelsVM: vm)
         default:
             LevelComingSoonView(level: vm.levels.first(where: { $0.id == id }))
         }
