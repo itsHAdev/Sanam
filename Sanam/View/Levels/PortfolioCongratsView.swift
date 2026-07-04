@@ -9,6 +9,7 @@ import AVFoundation
 struct PortfolioCongratsView: View {
     @ObservedObject var vm: PortfolioViewModel
     var onFinished: () -> Void
+    var onClose: () -> Void = {}
     @State private var bouncing = false
     @State private var appeared = false
     @State private var showCoins = false
@@ -157,6 +158,9 @@ struct PortfolioCongratsView: View {
     func dismiss() {
         withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             appeared = false
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            onClose()
         }
     }
 }

@@ -69,6 +69,8 @@ struct ContentView: View {
                         levelsVM.currentLevel = 2
                     }
                     dismiss()
+                }, onClose: {
+                    showCongrats = false
                 })
                 .transition(.opacity.combined(with: .scale))
             }

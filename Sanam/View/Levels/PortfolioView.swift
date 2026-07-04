@@ -27,6 +27,8 @@ struct PortfolioRootView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         vm.collectReward()
                     }
+                }, onClose: {
+                    vm.showCongrats = false
                 })
                 .transition(.opacity.combined(with: .scale))
             }

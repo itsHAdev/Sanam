@@ -145,6 +145,8 @@ struct StockTypeLevelView: View {
                         levelsVM.currentLevel = 5
                     }
                     dismiss()
+                }, onClose: {
+                    showReward = false
                 })
                 .transition(.opacity.combined(with: .scale))
                 .zIndex(2)

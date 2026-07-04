@@ -44,6 +44,8 @@ struct RumorGameView: View {
                         levelsVM.currentLevel = 4
                     }
                     dismiss()
+                }, onClose: {
+                    showReward = false
                 })
                 .transition(.opacity.combined(with: .scale))
             }

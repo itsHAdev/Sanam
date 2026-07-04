@@ -79,6 +79,8 @@ struct InvestmentLevelView: View {
                         levelsVM.currentLevel = 3
                     }
                     dismiss()
+                }, onClose: {
+                    showReward = false
                 })
                 .transition(.opacity.combined(with: .scale))
             }
