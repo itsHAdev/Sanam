@@ -21,12 +21,12 @@ final class LevelsViewModel: ObservableObject {
 
     let levels: [Level] = Level.all
 
-    func state(for id: Int) -> LevelState {
+    func state(for id: LevelID) -> LevelState {
         let totalLevels = levels.count
 
-        if id < currentLevel { return .completed }
-        if id == currentLevel && currentLevel > totalLevels { return .completed }
-        if id == currentLevel { return .active }
+        if id.rawValue < currentLevel { return .completed }
+        if id.rawValue == currentLevel && currentLevel > totalLevels { return .completed }
+        if id.rawValue == currentLevel { return .active }
         return .locked
     }
 }

@@ -2,8 +2,6 @@
 //  PrimaryButton.swift
 //  Sanam
 //
-//  Created by Hadeel on 27/06/2026.
-//
 
 import SwiftUI
 
@@ -135,19 +133,3 @@ struct SmallButton: View {
 }
 
 
-//طريقة استخدامه
-/**
- 
- PrimaryButton(title: "انتهيت") {
-     vm.didTapDone()
- }
-
- PrimaryButton(title: "تأكيد التوزيع") {
-     vm.confirm()
- }
-
- PrimaryButton(title: "اجمع") {
-     vm.collectReward()
- }
- 
- */

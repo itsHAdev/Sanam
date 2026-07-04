@@ -2,8 +2,6 @@
 //  SimulatorView.swift
 //  Sanam
 //
-//  Created by Hadeel on 27/06/2026.
-//
 
 import SwiftUI
 
@@ -161,7 +159,9 @@ struct headr: View{
                         .font(.system(size: 22))
                         .foregroundStyle(.textApp)
                 }//z
+                .contentShape(Circle())
             }
+            .menuStyle(.borderlessButton)
             .glassEffect(in: Circle())
             
             Spacer()

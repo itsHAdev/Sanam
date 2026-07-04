@@ -2,8 +2,6 @@
 //  Background.swift
 //  Sanam
 //
-//  Created by Hadeel on 28/06/2026.
-//
 
 import SwiftUI
 

@@ -127,46 +127,24 @@ struct LevelsListView: View {
     }
 
     @ViewBuilder
-    func destinationView(for id: Int) -> some View {
+    func destinationView(for id: LevelID) -> some View {
         switch id {
-        case 1:
+        case .one:
             ContentView(levelsVM: vm)
-        case 2:
+        case .two:
             InvestmentLevelView(levelsVM: vm)
-        case 3:
+        case .three:
             RumorGameView(levelsVM: vm)
-        case 4:
+        case .four:
             StockTypeLevelView(levelsVM: vm)
-        case 5:
+        case .five:
             PortfolioRootView(levelsVM: vm)
-        default:
-            LevelComingSoonView(level: vm.levels.first(where: { $0.id == id }))
         }
     }
 }
 
-// MARK: - Placeholder destination
-// النظام الأصلي بمشروع Snam- يربط كل مستوى بشاشة لعبة مستقلة
-// (ContentView / InvestmentLevelView / RumorGameView / StockTypeLevelView / PortfolioRootView)
-// ما كانت مطلوبة بهذا التعديل، فمؤقتًا كل مستوى يفتح شاشة بسيطة بدلها.
 
-struct LevelComingSoonView: View {
-    let level: Level?
 
-    var body: some View {
-        VStack(spacing: 12) {
-            Text(level?.title ?? "")
-                .font(.system(size: 22, weight: .bold))
-                .foregroundColor(.primary)
-
-            Text("هذا المستوى قيد التطوير")
-                .font(.system(size: 15))
-                .foregroundColor(.gray)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemBackground).ignoresSafeArea())
-    }
-}
 
 // MARK: - Progress Dot
 

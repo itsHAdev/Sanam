@@ -11,8 +11,18 @@ enum LevelState {
     case locked
 }
 
+enum LevelID: Int, CaseIterable, Identifiable {
+    case one = 1
+    case two = 2
+    case three = 3
+    case four = 4
+    case five = 5
+
+    var id: Int { rawValue }
+}
+
 struct Level {
-    let id: Int
+    let id: LevelID
     let label: String
     let title: String
     let description: String
@@ -21,11 +31,11 @@ struct Level {
 
 extension Level {
     static let all: [Level] = [
-        Level(id: 1, label: "المستوى الأول", title: "مستكشف الأسهم", description: "بنعلمك أساسيات الاستثمار في الأسهم", badge: "مستكشف"),
-        Level(id: 2, label: "المستوى الثاني", title: "فاهم اللعبه", description: "بنعلمك كيف تحلل السوق و تتخذ قراراتك الاولى", badge: "جامد"),
-        Level(id: 3, label: "المستوى الثالث", title: "أسطورة الأسهم", description: "استثمر بذكاء وتعلم شلون تختار السهم الصح", badge: "أسطوري"),
-        Level(id: 4, label: "المستوى الرابع", title: "هامور الأسهم", description: "بنعلمك استراتيجيات متقدمة للمحترفين", badge: "هامور"),
-        Level(id: 5, label: "المستوى الخامس", title: "مايسترو المحافظ", description: "وزع أموالك وتعلم فن إدارة المحافظ", badge: "مايسترو"),
+        Level(id: .one, label: "المستوى الأول", title: "مستكشف الأسهم", description: "بنعلمك أساسيات الاستثمار في الأسهم", badge: "مستكشف"),
+        Level(id: .two, label: "المستوى الثاني", title: "فاهم اللعبه", description: "بنعلمك كيف تحلل السوق و تتخذ قراراتك الاولى", badge: "جامد"),
+        Level(id: .three, label: "المستوى الثالث", title: "أسطورة الأسهم", description: "استثمر بذكاء وتعلم شلون تختار السهم الصح", badge: "أسطوري"),
+        Level(id: .four, label: "المستوى الرابع", title: "هامور الأسهم", description: "بنعلمك استراتيجيات متقدمة للمحترفين", badge: "هامور"),
+        Level(id: .five, label: "المستوى الخامس", title: "مايسترو المحافظ", description: "وزع أموالك وتعلم فن إدارة المحافظ", badge: "مايسترو"),
     ]
 }
 
