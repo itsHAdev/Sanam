@@ -22,7 +22,7 @@ struct StockTypeLevelView: View {
                 VStack(spacing: 24) {
                     Text("اختار نوع السهم")
                         .font(.system(size: 28, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                         .frame(maxWidth: .infinity, alignment: .trailing)
 
                     VStack(spacing: 16) {
@@ -39,10 +39,10 @@ struct StockTypeLevelView: View {
                                 VStack(alignment: .trailing, spacing: 18) {
                                     Text("السهم المضارب")
                                         .font(.system(size: 28, weight: .semibold))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.primary)
                                     Text("تشتري وتراقب وش يتغير بالسهم.")
                                         .font(.system(size: 20))
-                                        .foregroundColor(Color.white.opacity(0.5))
+                                        .foregroundColor(Color.primary.opacity(0.5))
                                         .multilineTextAlignment(.trailing)
                                 }
                             }
@@ -79,10 +79,10 @@ struct StockTypeLevelView: View {
                                 VStack(alignment: .trailing, spacing: 18) {
                                     Text("السهم الآمن")
                                         .font(.system(size: 28, weight: .semibold))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.primary)
                                     Text("تشتري بدون ما تراقب بشكل مستمر وش يتغير بالسهم.")
                                         .font(.system(size: 20))
-                                        .foregroundColor(Color.white.opacity(0.5))
+                                        .foregroundColor(Color.primary.opacity(0.5))
                                         .multilineTextAlignment(.trailing)
                                 }
                             }
@@ -187,7 +187,7 @@ struct StockTypeLevelView: View {
                 } label: {
                     Image(systemName: "xmark")
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.white.opacity(0.9))
+                        .foregroundColor(.primary.opacity(0.9))
                         .padding(10)
                         .background(Color.white.opacity(0.12))
                         .clipShape(Circle())
@@ -205,7 +205,7 @@ struct StockTypeLevelView: View {
                             .foregroundColor(Color(red: 157 / 255, green: 181 / 255, blue: 239 / 255))
                         Text(timeLabel)
                             .font(.system(size: 15))
-                            .foregroundColor(.white.opacity(0.8))
+                            .foregroundColor(.primary.opacity(0.8))
                             .animation(.easeInOut, value: timeLabel)
                     }
 
@@ -216,7 +216,7 @@ struct StockTypeLevelView: View {
                             VStack(alignment: .trailing, spacing: 4) {
                                 Text("بيرن اكس")
                                     .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.primary)
                                 Text("قطاع الأعمال")
                                     .font(.system(size: 16))
                                     .foregroundColor(.gray)
@@ -254,13 +254,13 @@ struct StockTypeLevelView: View {
 
                 Text(titleText)
                     .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .frame(maxWidth: .infinity, alignment: .trailing)
 
                 if showDescription {
                     Text(descriptionText)
                         .font(.system(size: 18))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.primary.opacity(0.5))
                         .multilineTextAlignment(.trailing)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }

@@ -220,7 +220,7 @@ struct PortfolioMainView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 14.26)
                                 .fill(isActive
-                                      ? Color(red: 0.345, green: 0.494, blue: 0.859).opacity(0.2)
+                                      ? Color.levelPortfolioSectorActive
                                       : Color(red: 0.125, green: 0.122, blue: 0.122).opacity(0.2))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 14.26)
@@ -308,7 +308,7 @@ struct SectorRowCard: View {
                             .foregroundColor(.primary)
                         Image(systemName: sector.icon)
                             .font(.system(size: 21))
-                            .foregroundColor(accentBlue)
+                            .foregroundColor(Color.levelPortfolioIconAccent)
                         Spacer()
                         HStack(spacing: 6) {
                             Text("\(arabicNumerals(String(sector.allocation))) سنام . \(arabicNumerals(String(percentage)))%")
@@ -330,7 +330,7 @@ struct SectorRowCard: View {
                         Button(action: { vm.decrement(id: sector.id) }) {
                             ZStack {
                                 Circle()
-                                    .fill(.ultraThinMaterial)
+                                    .fill(Color.levelPortfolioStepperBackground)
                                     .overlay(
                                         Circle()
                                             .stroke(Color.white.opacity(0.25), lineWidth: 1)
@@ -347,7 +347,7 @@ struct SectorRowCard: View {
                         VStack(spacing: 2) {
                             Image(systemName: sector.icon)
                                 .font(.system(size: 21))
-                                .foregroundColor(accentBlue)
+                                .foregroundColor(Color.levelPortfolioIconAccent)
                             Text(sector.name)
                                 .font(.system(size: 24, weight: .medium))
                                 .foregroundColor(.primary)
@@ -356,7 +356,7 @@ struct SectorRowCard: View {
                         Button(action: { vm.decrement(id: sector.id) }) {
                             ZStack {
                                 Circle()
-                                    .fill(.ultraThinMaterial)
+                                    .fill(Color.levelPortfolioStepperBackground)
                                     .overlay(
                                         Circle()
                                             .stroke(Color.white.opacity(0.25), lineWidth: 1)
@@ -381,7 +381,7 @@ struct SectorRowCard: View {
 
                             ZStack(alignment: .leading) {
                                 RoundedRectangle(cornerRadius: 22)
-                                    .fill(Color(red: 0.043, green: 0.071, blue: 0.137))
+                                    .fill(Color.levelPortfolioSliderTrackEmpty)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 22)
                                             .stroke(Color(red: 0.388, green: 0.388, blue: 0.388), lineWidth: 0.5)
@@ -397,7 +397,7 @@ struct SectorRowCard: View {
                                 .padding(.vertical, 1.1)
 
                                 Circle()
-                                    .fill(Color(red: 0.686, green: 0.706, blue: 0.757))
+                                    .fill(Color.levelPortfolioSliderThumb)
                                     .overlay(Circle().stroke(Color(red: 0.741, green: 0.741, blue: 0.741), lineWidth: 1))
                                     .frame(width: 22, height: 22)
                                     .offset(x: thumbX - 11, y: -6.5)
@@ -414,8 +414,8 @@ struct SectorRowCard: View {
                                                 .fill(
                                                     LinearGradient(
                                                         colors: [
-                                                            Color(red: 0.11, green: 0.11, blue: 0.12).opacity(0.84),
-                                                            Color(red: 0.11, green: 0.11, blue: 0.12).opacity(0.84)
+                                                            Color.levelPortfolioTooltipBackground,
+                                                            Color.levelPortfolioTooltipBackground
                                                         ],
                                                         startPoint: .top,
                                                         endPoint: .bottom
@@ -428,11 +428,11 @@ struct SectorRowCard: View {
 
                                     Text("\(arabicNumerals(String(sector.allocation))) سنام (\(arabicNumerals(String(percentage)))%)")
                                         .font(.system(size: 10, weight: .semibold))
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.primary)
                                 }
 
                                 Triangle()
-                                    .fill(Color(red: 0.11, green: 0.11, blue: 0.12).opacity(0.84))
+                                    .fill(Color.levelPortfolioTooltipBackground)
                                     .frame(width: 36.4, height: 8.45)
                             }
                             .offset(x: max(0, min(thumbX - 36, trackWidth - 73)), y: 0)
@@ -480,7 +480,7 @@ struct SectorRowCard: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color(red: 0.078, green: 0.114, blue: 0.224).opacity(0.2))
+                .fill(Color.levelPortfolioSectorCardBackground)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(

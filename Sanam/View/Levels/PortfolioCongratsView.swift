@@ -35,7 +35,7 @@ struct PortfolioCongratsView: View {
 
                 Text("مبروك!")
                     .font(.system(size: 55, weight: .semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .padding(.top, 24)
                 
                
@@ -69,7 +69,7 @@ struct PortfolioCongratsView: View {
                 
                 Text(arabicNumerals("+100"))
                     .font(.system(size: 99, weight: .semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
 
                 Spacer().frame(height: -20)
                 
@@ -124,8 +124,8 @@ struct PortfolioCongratsView: View {
                     .fill(
                         LinearGradient(
                             colors: [
-                                Color.black.opacity(0.6),
-                                Color.black.opacity(0.6)
+                                Color.levelPortfolioCongratsSheetBackground,
+                                Color.levelPortfolioCongratsSheetBackground
                             ],
                             startPoint: .top,
                             endPoint: .bottom

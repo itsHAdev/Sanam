@@ -237,7 +237,7 @@ struct InvestmentLevelView: View {
     private func glassCard<Content: View>(cornerRadius: CGFloat, @ViewBuilder content: () -> Content) -> some View {
         content()
             .padding(16)
-            .background(Color.clear)
+            .background(Color.levelGlassCardBackground)
             .overlay(
                 ZStack {
                     RoundedRectangle(cornerRadius: cornerRadius)
@@ -283,7 +283,7 @@ struct CustomGradientSlider: View {
                         .stroke(Color.primary.opacity(0.22), lineWidth: 1))
 
                 Circle()
-                    .fill(Color.primary)
+                    .fill(Color.white)
                     .frame(width: thumbSize, height: thumbSize)
                     .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
                     .overlay(Circle().stroke(Color.primary.opacity(0.2), lineWidth: 0.5))

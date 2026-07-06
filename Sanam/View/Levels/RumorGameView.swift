@@ -78,7 +78,7 @@ struct RumorGameView: View {
 
                 Text("توقعك صح")
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
 
                 Text(vm.userChoseUp ? "ارتفع سعر السهم زي ما توقعت" : "نزل سعر السهم زي ما توقعت")
                     .font(.system(size: 18))
@@ -112,7 +112,7 @@ struct RumorGameView: View {
                                     .foregroundColor(.gray)
                                 Text(vm.userChoseUp ? "108.99" : "89.99")
                                     .font(.system(size: 28, weight: .bold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.primary)
                             }
                         }
                         .padding(.horizontal, 40)
@@ -132,7 +132,7 @@ struct RumorGameView: View {
                             VStack(alignment: .trailing, spacing: 6) {
                                 Text("السبب")
                                     .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.primary)
                                 Text(vm.userChoseUp ? vm.rumor.reasonIfUp : vm.rumor.reasonIfDown)
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
@@ -169,7 +169,7 @@ struct RumorGameView: View {
 
                 Text("توقعك مو بمحله")
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
 
                 Text(vm.userChoseUp ? "انخفض سعر السهم عكس توقعك" : "ارتفع سعر السهم عكس توقعك")
                     .font(.system(size: 18))
@@ -204,7 +204,7 @@ struct RumorGameView: View {
                                 .foregroundColor(.gray)
                             Text("9.99")
                                 .font(.system(size: 28, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                         }
                     }
                     .padding(.horizontal, 40)
@@ -224,7 +224,7 @@ struct RumorGameView: View {
                         VStack(alignment: .trailing, spacing: 6) {
                             Text("السبب")
                                 .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                             Text(vm.userChoseUp ? vm.rumor.reasonUserChoseUpButFailed : vm.rumor.reasonUserChoseDownButFailed)
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
@@ -252,7 +252,7 @@ struct RumorGameView: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Text("من إشاعة اليوم والرسم البياني وش تتوقع تكون حالة السهم بكرة؟")
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .multilineTextAlignment(.trailing)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -260,7 +260,7 @@ struct RumorGameView: View {
 
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(Color.black.opacity(0.2))
+                    .fill(Color.levelRumorChartBoxBackground)
 
                 VStack(spacing: 16) {
                     HStack(spacing: 8) {
@@ -268,7 +268,7 @@ struct RumorGameView: View {
                         VStack(alignment: .trailing, spacing: 4) {
                             Text(vm.rumor.companyName)
                                 .font(.system(size: 14, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                             Text(vm.rumor.sector)
                                 .font(.system(size: 10))
                                 .foregroundColor(.gray)
@@ -286,7 +286,7 @@ struct RumorGameView: View {
                                 .foregroundColor(vm.isStockUp ? .green : .red)
                             Text("٩٩.٩٩")
                                 .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                         }
                         .environment(\.layoutDirection, .leftToRight)
                     }
@@ -312,7 +312,7 @@ struct RumorGameView: View {
                         Text("ينزل")
                     }
                     .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.levelRumorButtonText)
                     .frame(width: 130, height: 50)
                     .background(
                         LinearGradient(
@@ -341,7 +341,7 @@ struct RumorGameView: View {
                         Text("يرتفع")
                     }
                     .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.levelRumorButtonText)
                     .frame(width: 130, height: 50)
                     .background(
                         LinearGradient(
@@ -371,12 +371,10 @@ struct RumorGameView: View {
     private var rumorPopupOverlay: some View {
         Group {
             if vm.showRumorPopup {
-                Color.black.opacity(0.85)
-                    .ignoresSafeArea()
                 VStack(spacing: 32) {
                     Text("إشاعات اليوم")
                         .font(.system(size: 34, weight: .semibold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
 
                     Image(systemName: "fuelpump.fill")
                         .font(.system(size: 84))
@@ -385,11 +383,11 @@ struct RumorGameView: View {
                     VStack(spacing: 12) {
                         Text(vm.rumor.headline)
                             .font(.system(size: 22, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
 
                         Text(vm.rumor.description)
                             .font(.system(size: 18))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.levelRumorPopupSecondaryText)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -402,10 +400,10 @@ struct RumorGameView: View {
                 .frame(width: 353)
                 .background(
                     RoundedRectangle(cornerRadius: 30)
-                        .fill(Color.black.opacity(0.45))
+                        .fill(Color.levelRumorPopupBackground)
                         .overlay(
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                .stroke(Color.white.opacity(0.01), lineWidth: 1)
                         )
                 )
             }
@@ -508,14 +506,6 @@ struct RumorGameView: View {
                 }
             }
             .padding(12)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.black.opacity(0.3))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color.white.opacity(0.08), lineWidth: 1)
-                    )
-            )
         }
     }
 }

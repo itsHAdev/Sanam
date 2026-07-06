@@ -126,11 +126,12 @@ struct CubeView: UIViewRepresentable {
         scene.rootNode.addChildNode(ambientNode)
 
         // Cube
+        let isDark = context.environment.colorScheme == .dark
         let cube = SCNBox(width: 2.2, height: 2.2, length: 2.2, chamferRadius: 0.12)
-        let sideMaterials = faces.map { faceMaterial(face: $0) }
-        let empty = emptyFaceMaterial()
-        let topFace = emptyFaceMaterial()
-        let bottomFace = faceMaterial(face: CubeFace(title: "عنوان", subtitle: "نص", icon: .empty))
+        let sideMaterials = faces.map { faceMaterial(face: $0, isDark: isDark) }
+        let empty = emptyFaceMaterial(isDark: isDark)
+        let topFace = emptyFaceMaterial(isDark: isDark)
+        let bottomFace = faceMaterial(face: CubeFace(title: "عنوان", subtitle: "نص", icon: .empty), isDark: isDark)
         cube.materials = sideMaterials + [topFace, bottomFace]
         let cubeNode = SCNNode(geometry: cube)
         cubeNode.name = "cube"
@@ -140,17 +141,28 @@ struct CubeView: UIViewRepresentable {
                                          action: #selector(Coordinator.handlePan(_:)))
         view.addGestureRecognizer(pan)
         context.coordinator.cubeNode = cubeNode
+        context.coordinator.lastIsDark = isDark
 
         return view
     }
 
-    func updateUIView(_ uiView: SCNView, context: Context) {}
+    func updateUIView(_ uiView: SCNView, context: Context) {
+        let isDark = context.environment.colorScheme == .dark
+        guard context.coordinator.lastIsDark != isDark,
+              let cube = context.coordinator.cubeNode?.geometry as? SCNBox else { return }
+        context.coordinator.lastIsDark = isDark
+        let sideMaterials = faces.map { faceMaterial(face: $0, isDark: isDark) }
+        let topFace = emptyFaceMaterial(isDark: isDark)
+        let bottomFace = faceMaterial(face: CubeFace(title: "عنوان", subtitle: "نص", icon: .empty), isDark: isDark)
+        cube.materials = sideMaterials + [topFace, bottomFace]
+    }
 
     // MARK: - Coordinator
 
     class Coordinator: NSObject {
         var cubeNode: SCNNode?
         var lastAngleY: Float = 0
+        var lastIsDark: Bool = false
         var onFaceChanged: (Int) -> Void
 
         init(onFaceChanged: @escaping (Int) -> Void) {
@@ -181,7 +193,14 @@ struct CubeView: UIViewRepresentable {
 
     // MARK: - Materials
 
-    func faceMaterial(face: CubeFace) -> SCNMaterial {
+    func resolvedColor(_ named: String, fallback: UIColor, isDark: Bool) -> UIColor {
+        let trait = UITraitCollection(userInterfaceStyle: isDark ? .dark : .light)
+        return (UIColor(named: named) ?? fallback).resolvedColor(with: trait)
+    }
+
+    func faceMaterial(face: CubeFace, isDark: Bool) -> SCNMaterial {
+        let backgroundColor = resolvedColor("cubeFaceBackground", fallback: UIColor(red: 0.04, green: 0.06, blue: 0.12, alpha: 1), isDark: isDark)
+        let subtitleColor = resolvedColor("cubeSubtitleText", fallback: UIColor(white: 1, alpha: 0.55), isDark: isDark)
         let material = SCNMaterial()
         let size = CGSize(width: 500, height: 500)
         let image = UIGraphicsImageRenderer(size: size).image { ctx in
@@ -190,7 +209,7 @@ struct CubeView: UIViewRepresentable {
             let radius: CGFloat = 38
 
             let path = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
-            UIColor(red: 0.04, green: 0.06, blue: 0.12, alpha: 1).setFill()
+            backgroundColor.setFill()
             path.fill()
             UIColor(white: 0, alpha: 0.2).setFill()
             path.fill()
@@ -239,7 +258,7 @@ struct CubeView: UIViewRepresentable {
             subStyle.alignment = .center
             face.subtitle.draw(in: CGRect(x: 20, y: 385, width: 460, height: 80), withAttributes: [
                 .font: UIFont.systemFont(ofSize: 34),
-                .foregroundColor: UIColor(white: 1, alpha: 0.55),
+                .foregroundColor: subtitleColor,
                 .paragraphStyle: subStyle
             ])
         }
@@ -248,12 +267,13 @@ struct CubeView: UIViewRepresentable {
         return material
     }
 
-    func emptyFaceMaterial() -> SCNMaterial {
+    func emptyFaceMaterial(isDark: Bool) -> SCNMaterial {
+        let backgroundColor = resolvedColor("cubeFaceBackground", fallback: UIColor(red: 0.04, green: 0.06, blue: 0.12, alpha: 1), isDark: isDark)
         let material = SCNMaterial()
         let size = CGSize(width: 500, height: 500)
         let image = UIGraphicsImageRenderer(size: size).image { _ in
             let path = UIBezierPath(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 38)
-            UIColor(red: 0.04, green: 0.06, blue: 0.12, alpha: 1).setFill()
+            backgroundColor.setFill()
             path.fill()
             let shine = UIBezierPath(roundedRect: CGRect(x: 1, y: 1, width: 498, height: 498), cornerRadius: 38)
             UIColor(white: 1, alpha: 0.08).setStroke()

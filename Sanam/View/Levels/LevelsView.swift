@@ -203,7 +203,7 @@ struct LevelCardView: View {
 
                 Text(level.title)
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(state == .locked ? Color.levelLockedTitle.opacity(0.53) : Color.levelCardTitleActive)
+                    .foregroundColor(state == .locked ? Color.levelLockedTitle.opacity(0.53) : .primary)
 
                 Text(level.description)
                     .font(.system(size: 11, weight: .light))
@@ -272,18 +272,17 @@ struct ShieldWithDiamond: View {
             }
             .frame(width: 63, height: 74)
 
-            ZStack {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.levelShieldBase)
-                    .frame(width: 35, height: 10)
-
-                Text(badge)
-                    .font(.custom("BalooBhai2-Regular", size: 12))
-                    .foregroundColor(.white)
-                    .frame(width: 42, height: 12)
-            }
-            .frame(width: 42, height: 12)
-            .offset(y: -12)
+            Text(badge)
+                .font(.custom("BalooBhai2-Regular", size: 12))
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .padding(.horizontal, 6)
+                .frame(height: 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(Color.levelShieldBase)
+                )
+                .offset(y: -12)
         }
         .frame(width: 63)
     }
