@@ -15,7 +15,7 @@ struct SanamApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                RootTabView()
+                OnboardingView()
             }
             .environmentObject(simulatorVM)
             .environmentObject(walletVM)
