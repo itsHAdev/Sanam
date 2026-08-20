@@ -15,57 +15,61 @@ struct SanamMarket: View {
             VStack(spacing: 32){
             
                 Header2(title: "سوق سنام")
+                
+                Spacer().frame(height: 0)
     
-                //MARK: - shareRectangle
+                //MARK: - shareRectangle ** (Soon in next version) **
                 
-                ZStack{
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(.backApp).opacity(0.6)
-                        .frame(width: .infinity, height: 85)
-                        .glassEffect(in: .rect(cornerRadius: 20))
-                    
-                    HStack{
-                        
-                        ShareLink(
-                            item: URL(string: "https://apps.apple.com/app/id1234567890")!
-                        ) {
-                            ZStack {
-
-                                Circle()
-                                    .fill(.darkBlue)
-                                    .frame(width: 44, height: 44)
-                                    .shadow(color: .black.opacity(0.1), radius: 1)
-                                    .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 1)
-                                    .overlay(
-                                        Circle()
-                                            .stroke(Color.white.opacity(0.15), lineWidth: 1))
-                                    
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.system(size: 18, weight: .medium))
-                                    .foregroundStyle(.white)
-                            }//z
-                        }//b
-                        
-                        Spacer()
-                        
-                        VStack(alignment: .trailing){
-                            Text("شارك سنام مع ربعك وبتربح ١٠٠ ")
-                                .font(.system(size: 18,weight: .semibold))
-                                .foregroundStyle(.textApp)
-                            +
-                            Text("سنام")
-                                .font(.system(size: 12))
-                                .foregroundStyle(.gray)
-                            
-                            Text("في محفظتك")
-                                .font(.system(size: 18,weight: .semibold))
-                                .foregroundStyle(.textApp)
-                            
-                        }//v
-                    }//h
-                    .padding()
-                }//z
+              
                 
+//                ZStack{
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .fill(.backApp).opacity(0.6)
+//                        .frame(width: .infinity, height: 85)
+//                        .glassEffect(in: .rect(cornerRadius: 20))
+//                    
+//                    HStack{
+//                        
+//                        ShareLink(
+//                            item: URL(string: "https://apps.apple.com/app/id1234567890")!
+//                        ) {
+//                            ZStack {
+//
+//                                Circle()
+//                                    .fill(.darkBlue)
+//                                    .frame(width: 44, height: 44)
+//                                    .shadow(color: .black.opacity(0.1), radius: 1)
+//                                    .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 1)
+//                                    .overlay(
+//                                        Circle()
+//                                            .stroke(Color.white.opacity(0.15), lineWidth: 1))
+//                                    
+//                                Image(systemName: "square.and.arrow.up")
+//                                    .font(.system(size: 18, weight: .medium))
+//                                    .foregroundStyle(.white)
+//                            }//z
+//                        }//b
+//                        
+//                        Spacer()
+//                        
+//                        VStack(alignment: .trailing){
+//                            Text("شارك سنام مع ربعك وبتربح ١٠٠ ")
+//                                .font(.system(size: 18,weight: .semibold))
+//                                .foregroundStyle(.textApp)
+//                            +
+//                            Text("سنام")
+//                                .font(.system(size: 12))
+//                                .foregroundStyle(.gray)
+//                            
+//                            Text("في محفظتك")
+//                                .font(.system(size: 18,weight: .semibold))
+//                                .foregroundStyle(.textApp)
+//                            
+//                        }//v
+//                    }//h
+//                    .padding()
+//                }//z
+//                
                 
                     //MARK: - CoinsSection
                 
@@ -108,7 +112,7 @@ struct CoinCard: View {
                     .resizable()
                     .frame(width: 76, height: 76)
 
-                SmallButton(title: package.buttonTitle) {
+                SmallSoonButton(title: "قريبا") {
                    
                 }//b
             }//v

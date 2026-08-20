@@ -26,10 +26,11 @@ final class WalletViewModel: ObservableObject {
     }
 
     var appAppearance: AppAppearance {
-        get { AppAppearance(rawValue: appAppearanceRaw) ?? .system }
+        get {
+            AppAppearance(rawValue: appAppearanceRaw) ?? .system
+        }
         set {
             appAppearanceRaw = newValue.rawValue
-            objectWillChange.send()
         }
     }
 

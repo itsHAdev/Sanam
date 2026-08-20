@@ -19,6 +19,7 @@ struct SanamApp: App {
             }
             .environmentObject(simulatorVM)
             .environmentObject(walletVM)
+            .preferredColorScheme(walletVM.appAppearance.colorScheme)
         }
     }
 }
