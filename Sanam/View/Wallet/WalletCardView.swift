@@ -26,13 +26,33 @@ struct WalletCardView: View {
                     .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
                     .frame(maxWidth: .infinity, alignment: .center)
 
-                Text(arabicNumerals(String(Int(walletVM.balance))))
-                    .font(.system(size: isPreview ? 40 : 40, weight: .black))
-                    .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
-                    .foregroundColor(theme.textColor)
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                HStack{
+                    
+                    //plus button to snamMarket
+                    NavigationLink{
+                        SanamMarket()
+                            .navigationBarBackButtonHidden(true)
+                    }label: {
+                        ZStack{
+                            Circle()
+                                .frame(width: 23,height: 23)
+                                .foregroundStyle(.clear)
+                                .glassEffect()
+                            
+                            Image(systemName: "plus")
+                                .font(.system(size: 14,weight: .medium))
+                                .foregroundStyle(theme.textColor)
+                        }//z
+                    }
+                    
+                    Text(arabicNumerals(String(Int(walletVM.balance))))
+                        .font(.system(size: isPreview ? 40 : 40, weight: .black))
+                        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
+                        .foregroundColor(theme.textColor)
+                        .frame(alignment: .center)
+                }//h
+            }//v
+            
 
             VStack {
                 Spacer()
@@ -53,26 +73,7 @@ struct WalletCardView: View {
                 .padding(.trailing, isPreview ? 20 : 20)
                 .padding(.bottom, isPreview ? 20 : 20)
             }
-            
-            //plus button to snamMarket
-            NavigationLink{
-                SanamMarket()
-                    .navigationBarBackButtonHidden(true)
-            }label: {
-                ZStack{
-                    Circle()
-                        .frame(width: 23,height: 23)
-                        .foregroundStyle(.clear)
-                        .glassEffect()
-                    
-                    Image(systemName: "plus")
-                        .font(.system(size: 14,weight: .medium))
-                        .foregroundStyle(theme.textColor)
-                }//z
-                
-                
-            } .offset(x: -40,y: 10)
-        }
+        }//z
         .frame(
             width: isPreview ? nil : UIScreen.main.bounds.width - 48,
             height: isPreview ? 172 : 180
